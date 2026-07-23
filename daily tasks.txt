@@ -1,1 +1,209 @@
 
+Please update the Affiliate v2 Power BI project to implement the power-user feedback below.
+
+First, inspect the existing PBIP/PBIR model, report pages, measures, themes, slicers, visuals, and available fields. Do not make assumptions about unsupported fields.
+
+Scope
+
+This ticket includes dashboard/report updates only.
+
+Do not implement the “Manual Flat Fee / Reversal / Bonus Integration” section. That work is tracked separately.
+
+Before making changes
+Identify all Affiliate v2 report pages and their page names.
+Identify the existing KPI scorecard measures and period-over-period comparison measures.
+Confirm whether the model supports:
+Ad Link as a dimension below Ad Name.
+Broadband versus Fiber account or segment filtering.
+Report the feasibility findings before implementing those two items.
+Create a backup or work only in the requested PBIP/PBIR folder without modifying unrelated reports.
+Global changes across all pages
+Scorecards
+
+Apply period-over-period color logic by KPI category:
+
+Costs and conversions:
+Total Cost
+Clicks
+Actions
+Other Cost
+Payable Click Cost
+Lead
+HINT EC
+Increase = green
+Decrease = red
+Cost-per-conversion:
+CPA
+CPL
+CpMid Funnel
+CpHINT EC
+Increase = red
+Decrease = green
+Conversion rates:
+CVR
+Lead CVR
+Mid Funnel CVR
+HINT EC CVR
+Increase = green
+Decrease = red
+Partners:
+Increase = green
+Decrease = red
+
+Use T-Mobile-approved green and red shades where applicable.
+
+Add comma separators to large numbers displayed in percentage-change or comparison values.
+
+Reorder KPI scorecards to:
+
+Conversion → CPA → CVR
+
+Example for TFB:
+
+Lead → CPL → Lead CVR
+
+Apply the same order consistently to other conversion groups.
+
+Filters
+Make all report filters and slicers multi-select.
+Scope the Partner slicer to the active LOB page.
+Each page must only display partners relevant to that LOB.
+Do not allow unrelated LOB partners to appear.
+Branding and text
+Replace red body text, headers, labels, or emphasis text with T-Mobile Magenta.
+Do not change red values used specifically for negative KPI conditional formatting.
+Preserve readability and accessibility.
+Performance tables
+
+Update the performance tables to include the complete conversion metric groups.
+
+Each conversion must have:
+
+Conversion metric → matching CPA metric → matching CVR metric
+
+For TFB, include at minimum:
+
+Lead
+CPL
+Lead CVR
+Mid Funnel
+CpMid Funnel
+Mid Funnel CVR
+TFB HINT EC
+CpTFB HINT EC
+TFB HINT EC CVR
+
+Use the mockup naming and ordering where available.
+
+Check the other LOB pages and apply the equivalent full conversion, CPA, and CVR metric groups.
+
+Ad Link feasibility
+
+Determine whether Ad Link can be implemented as an optional drill-down hierarchy under Ad Name:
+
+Ad Name
+→ Ad Link #1
+→ Ad Link #2 or the available Ad Link values
+
+Confirm:
+
+Whether an Ad Link field exists.
+Its relationship and granularity.
+Whether one Ad Name can contain multiple Ad Links.
+Whether adding it causes duplication or incorrect aggregation.
+Whether drill-down can be added without changing existing totals.
+
+Only build the drill-down when it is technically valid and does not create incorrect totals.
+
+If it is infeasible, do not build it. Document the exact model limitation.
+
+Mockup alignment
+Add a Performance by Day chart.
+Match the chart configuration, metric, axis, tooltip, and formatting to the mockup as closely as possible.
+Move the BTS tab immediately after the Postpaid tab.
+Preserve all existing bookmarks, navigation buttons, page tooltips, drill-through behavior, and synced slicers.
+TFB page
+Add a Leads scorecard.
+Apply the correct Leads period-over-period color logic.
+Update the Action Distribution chart to the T-Mobile brand palette.
+Update the Actions/CPA by Date chart to the T-Mobile brand palette.
+Add a “Top 5 Publishers by Leads” visual.
+Mirror the design, filtering, title style, sorting, interaction behavior, and layout of the existing “Top 5 Publishers by Spend” visual.
+Sort descending by Leads.
+Limit the visual to the top five publishers.
+Make sure the visual responds correctly to page filters.
+Prepaid page
+
+Update all report colors to Metro by T-Mobile brand standards.
+
+Use the existing report theme or approved theme values when available.
+
+The expected primary palette is:
+
+Metro purple
+Metro orange
+
+Apply the palette consistently to:
+
+Charts
+Legends
+Highlights
+Selected states
+KPI accents
+Titles or shapes where appropriate
+
+Do not reduce readability or use colors that make series difficult to distinguish.
+
+Broadband page
+
+Inspect the model for fields that distinguish:
+
+Broadband accounts
+Fiber accounts
+Combined broadband/fiber accounts or segments
+
+If supported, update the Segment or Account filter so users can select Broadband, Fiber, or both.
+
+Validate that:
+
+The filter changes all intended visuals.
+Totals remain correct.
+No unrelated segments appear.
+Existing broadband data is not excluded accidentally.
+
+If the model does not support this split, do not create hardcoded classifications without evidence. Document the missing field, relationship, or mapping required.
+
+Validation
+
+After making the changes:
+
+Open every Affiliate v2 page and check for broken visuals.
+Confirm there are no missing measures or field errors.
+Confirm all slicers work and are multi-select.
+Confirm the Partner slicer is correctly scoped by LOB.
+Confirm scorecard colors using both positive and negative period-over-period examples.
+Confirm large comparison values use comma separators.
+Confirm KPI order is Conversion → CPA → CVR.
+Confirm performance tables contain the full conversion, CPA, and CVR metric sets.
+Confirm report tab order places BTS after Postpaid.
+Validate the TFB, Prepaid, and Broadband changes.
+Compare the result against the supplied mockup.
+Check that existing v2 pages and calculations have no regression.
+Required final response
+
+Provide a clear completion report containing:
+
+Files modified
+Pages modified
+Measures created or updated
+Visuals created or updated
+Theme or color changes
+Filter changes
+Ad Link drill-down feasibility result
+Whether Ad Link drill-down was implemented
+Broadband/Fiber model-support result
+Any infeasible item and the exact reason
+Validation performed
+Any remaining issue requiring customer, data-model, or engineering input
+
+Do not mark an item complete unless it was implemented and validated.
