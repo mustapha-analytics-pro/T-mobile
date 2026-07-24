@@ -1528,51 +1528,56 @@ createOrReplace
 			lineageTag: 6d03c9e3-f715-4e64-98bc-7ceffbedacdf
 
 		measure 'TFB Lead Previous Label' =
-				VAR _prev = [TFB Lead Actions Previous Period]
+				VAR MaxDate = MAX(dim_date[date])
+				VAR MinDate = MIN(dim_date[date])
+				VAR DateRange = MaxDate - MinDate
+				VAR PrevStartDate = MinDate - DateRange - 1
+				VAR PrevEndDate = MaxDate - DateRange - 1
+				VAR _prev =
+					CALCULATE(
+						[TFB Lead Actions],
+						REMOVEFILTERS(dim_date),
+						DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
+					)
 				RETURN
-				    "vs previous: " &
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "N/A",
-				        ABS(_prev) >= 1000000, FORMAT(_prev / 1000000, "#,##0.0M"),
-				        ABS(_prev) >= 1000, FORMAT(_prev / 1000, "#,##0.0K"),
-				        FORMAT(_prev, "#,##0")
-				    )
+					"vs previous: " &
+					SWITCH(
+						TRUE(),
+						ISBLANK(_prev), "N/A",
+						ABS(_prev) >= 1000000, FORMAT(_prev / 1000000, "#,##0.0M"),
+						ABS(_prev) >= 1000, FORMAT(_prev / 1000, "#,##0.0K"),
+						FORMAT(_prev, "#,##0")
+					)
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 943b775b-6807-4d07-9714-ffbafaa8ff33
-
 		measure 'TFB Lead Change Label' =
 				VAR _cur = [TFB Lead Actions]
-				VAR _prev = [TFB Lead Actions Previous Period]
+				VAR MaxDate = MAX(dim_date[date])
+				VAR MinDate = MIN(dim_date[date])
+				VAR DateRange = MaxDate - MinDate
+				VAR PrevStartDate = MinDate - DateRange - 1
+				VAR PrevEndDate = MaxDate - DateRange - 1
+				VAR _prev = CALCULATE([TFB Lead Actions], REMOVEFILTERS(dim_date), DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate))
 				VAR _pct = DIVIDE(_cur - _prev, _prev)
 				RETURN
-				    IF(
-				        ISBLANK(_pct),
-				        "—",
-				        SWITCH(
-				            TRUE(),
-				            _cur > _prev, "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				            _cur < _prev, "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				            "0.0%"
-				        )
-				    )
+					IF(
+						ISBLANK(_pct),
+						"—",
+						SWITCH(TRUE(), _cur > _prev, "▴ " & FORMAT(ABS(_pct), "#,##0.0%"), _cur < _prev, "▾ " & FORMAT(ABS(_pct), "#,##0.0%"), "0.0%")
+					)
 			displayFolder: 07 KPI Card Labels
 			lineageTag: a2d42e62-1fe1-426e-9d37-8a8916459dc0
-
 		measure 'TFB Lead Label Color' =
 				VAR _cur = [TFB Lead Actions]
-				VAR _prev = [TFB Lead Actions Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
+				VAR MaxDate = MAX(dim_date[date])
+				VAR MinDate = MIN(dim_date[date])
+				VAR DateRange = MaxDate - MinDate
+				VAR PrevStartDate = MinDate - DateRange - 1
+				VAR PrevEndDate = MaxDate - DateRange - 1
+				VAR _prev = CALCULATE([TFB Lead Actions], REMOVEFILTERS(dim_date), DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate))
+				RETURN SWITCH(TRUE(), ISBLANK(_prev), "#808080", _cur > _prev, "#00A651", _cur < _prev, "#D13438", "#808080")
 			displayFolder: 07 KPI Card Labels
 			lineageTag: b132a7f9-7c37-4ef3-a7d7-222164097054
-
 		/// Previous-period value for TFB Mid Funnel Actions
 		measure 'TFB Mid Funnel Actions Previous Period' =
 				VAR MaxDate = MAX(dim_date[date])
@@ -1595,51 +1600,38 @@ createOrReplace
 			lineageTag: caf2af92-3aa0-47c9-81c3-6c8f717108b6
 
 		measure 'TFB Mid Funnel Previous Label' =
-				VAR _prev = [TFB Mid Funnel Actions Previous Period]
-				RETURN
-				    "vs previous: " &
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "N/A",
-				        ABS(_prev) >= 1000000, FORMAT(_prev / 1000000, "#,##0.0M"),
-				        ABS(_prev) >= 1000, FORMAT(_prev / 1000, "#,##0.0K"),
-				        FORMAT(_prev, "#,##0")
-				    )
+				VAR MaxDate = MAX(dim_date[date])
+				VAR MinDate = MIN(dim_date[date])
+				VAR DateRange = MaxDate - MinDate
+				VAR PrevStartDate = MinDate - DateRange - 1
+				VAR PrevEndDate = MaxDate - DateRange - 1
+				VAR _prev = CALCULATE([TFB Mid Funnel Actions], REMOVEFILTERS(dim_date), DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate))
+				RETURN "vs previous: " & SWITCH(TRUE(), ISBLANK(_prev), "N/A", ABS(_prev) >= 1000000, FORMAT(_prev / 1000000, "#,##0.0M"), ABS(_prev) >= 1000, FORMAT(_prev / 1000, "#,##0.0K"), FORMAT(_prev, "#,##0"))
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 5a42c04b-08ea-44d0-a3df-b3c0d25356c7
-
 		measure 'TFB Mid Funnel Change Label' =
 				VAR _cur = [TFB Mid Funnel Actions]
-				VAR _prev = [TFB Mid Funnel Actions Previous Period]
+				VAR MaxDate = MAX(dim_date[date])
+				VAR MinDate = MIN(dim_date[date])
+				VAR DateRange = MaxDate - MinDate
+				VAR PrevStartDate = MinDate - DateRange - 1
+				VAR PrevEndDate = MaxDate - DateRange - 1
+				VAR _prev = CALCULATE([TFB Mid Funnel Actions], REMOVEFILTERS(dim_date), DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate))
 				VAR _pct = DIVIDE(_cur - _prev, _prev)
-				RETURN
-				    IF(
-				        ISBLANK(_pct),
-				        "—",
-				        SWITCH(
-				            TRUE(),
-				            _cur > _prev, "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				            _cur < _prev, "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				            "0.0%"
-				        )
-				    )
+				RETURN IF(ISBLANK(_pct), "—", SWITCH(TRUE(), _cur > _prev, "▴ " & FORMAT(ABS(_pct), "#,##0.0%"), _cur < _prev, "▾ " & FORMAT(ABS(_pct), "#,##0.0%"), "0.0%"))
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 139f64ee-b0ea-4789-8f0f-32617fbc5220
-
 		measure 'TFB Mid Funnel Label Color' =
 				VAR _cur = [TFB Mid Funnel Actions]
-				VAR _prev = [TFB Mid Funnel Actions Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
+				VAR MaxDate = MAX(dim_date[date])
+				VAR MinDate = MIN(dim_date[date])
+				VAR DateRange = MaxDate - MinDate
+				VAR PrevStartDate = MinDate - DateRange - 1
+				VAR PrevEndDate = MaxDate - DateRange - 1
+				VAR _prev = CALCULATE([TFB Mid Funnel Actions], REMOVEFILTERS(dim_date), DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate))
+				RETURN SWITCH(TRUE(), ISBLANK(_prev), "#808080", _cur > _prev, "#00A651", _cur < _prev, "#D13438", "#808080")
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 0bcacff3-e116-4ca3-bd9d-485ef6d164a4
-
 		/// Previous-period value for TFB HINT EC Actions
 		measure 'TFB HINT EC Actions Previous Period' =
 				VAR MaxDate = MAX(dim_date[date])
@@ -1662,51 +1654,38 @@ createOrReplace
 			lineageTag: b6db7c07-c289-4853-8acd-beb9669bdafb
 
 		measure 'TFB HINT EC Previous Label' =
-				VAR _prev = [TFB HINT EC Actions Previous Period]
-				RETURN
-				    "vs previous: " &
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "N/A",
-				        ABS(_prev) >= 1000000, FORMAT(_prev / 1000000, "#,##0.0M"),
-				        ABS(_prev) >= 1000, FORMAT(_prev / 1000, "#,##0.0K"),
-				        FORMAT(_prev, "#,##0")
-				    )
+				VAR MaxDate = MAX(dim_date[date])
+				VAR MinDate = MIN(dim_date[date])
+				VAR DateRange = MaxDate - MinDate
+				VAR PrevStartDate = MinDate - DateRange - 1
+				VAR PrevEndDate = MaxDate - DateRange - 1
+				VAR _prev = CALCULATE([TFB HINT EC Actions], REMOVEFILTERS(dim_date), DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate))
+				RETURN "vs previous: " & SWITCH(TRUE(), ISBLANK(_prev), "N/A", ABS(_prev) >= 1000000, FORMAT(_prev / 1000000, "#,##0.0M"), ABS(_prev) >= 1000, FORMAT(_prev / 1000, "#,##0.0K"), FORMAT(_prev, "#,##0"))
 			displayFolder: 07 KPI Card Labels
 			lineageTag: d8ef2411-3868-48ca-b66e-92d3853fe616
-
 		measure 'TFB HINT EC Change Label' =
 				VAR _cur = [TFB HINT EC Actions]
-				VAR _prev = [TFB HINT EC Actions Previous Period]
+				VAR MaxDate = MAX(dim_date[date])
+				VAR MinDate = MIN(dim_date[date])
+				VAR DateRange = MaxDate - MinDate
+				VAR PrevStartDate = MinDate - DateRange - 1
+				VAR PrevEndDate = MaxDate - DateRange - 1
+				VAR _prev = CALCULATE([TFB HINT EC Actions], REMOVEFILTERS(dim_date), DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate))
 				VAR _pct = DIVIDE(_cur - _prev, _prev)
-				RETURN
-				    IF(
-				        ISBLANK(_pct),
-				        "—",
-				        SWITCH(
-				            TRUE(),
-				            _cur > _prev, "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				            _cur < _prev, "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				            "0.0%"
-				        )
-				    )
+				RETURN IF(ISBLANK(_pct), "—", SWITCH(TRUE(), _cur > _prev, "▴ " & FORMAT(ABS(_pct), "#,##0.0%"), _cur < _prev, "▾ " & FORMAT(ABS(_pct), "#,##0.0%"), "0.0%"))
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 2e1d4073-f716-4d4e-91d5-a2f83f78cda2
-
 		measure 'TFB HINT EC Label Color' =
 				VAR _cur = [TFB HINT EC Actions]
-				VAR _prev = [TFB HINT EC Actions Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
+				VAR MaxDate = MAX(dim_date[date])
+				VAR MinDate = MIN(dim_date[date])
+				VAR DateRange = MaxDate - MinDate
+				VAR PrevStartDate = MinDate - DateRange - 1
+				VAR PrevEndDate = MaxDate - DateRange - 1
+				VAR _prev = CALCULATE([TFB HINT EC Actions], REMOVEFILTERS(dim_date), DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate))
+				RETURN SWITCH(TRUE(), ISBLANK(_prev), "#808080", _cur > _prev, "#00A651", _cur < _prev, "#D13438", "#808080")
 			displayFolder: 07 KPI Card Labels
 			lineageTag: ac5b94db-755a-45ea-a796-86d66b7690db
-
 		measure 'CpL Previous Period' =
 				VAR MaxDate = MAX(dim_date[date])
 				VAR MinDate = MIN(dim_date[date])
