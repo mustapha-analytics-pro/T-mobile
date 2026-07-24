@@ -442,56 +442,146 @@ createOrReplace
 			lineageTag: 62b1fbe3-d7e3-40bd-bf40-1f20868595b0
 
 		/// Conditional color for Total Cost card (Green if lower or equal, Red if higher)
-		measure 'Total Cost Color' = IF([Total Cost] <= [Total Cost Previous Period], "#00A651", "#D13438")
+		measure 'Total Cost Color' =
+				VAR _cur = [Total Cost]
+				VAR _prev = [Total Cost Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
 			displayFolder: 06 Formatting Colors
 			lineageTag: 4c359db4-57d9-4237-b631-9019e227f7b4
 
-		/// Conditional color for Action Cost card (Green if lower or equal, Red if higher)
-		measure 'Action Cost Color' = IF([Action Cost] <= [Action Cost Previous Period], "#00A651", "#D13438")
+		measure 'Action Cost Color' =
+				VAR _cur = [Action Cost]
+				VAR _prev = [Action Cost Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
 			displayFolder: 06 Formatting Colors
 			lineageTag: 54a8a6af-dc95-4dd3-b7e7-6eff655a6d3e
 
-		/// Conditional color for Other Cost card (Green if lower or equal, Red if higher)
-		measure 'Other Cost Color' = IF([Other Cost] <= [Other Cost Previous Period], "#00A651", "#D13438")
+		measure 'Other Cost Color' =
+				VAR _cur = [Other Cost]
+				VAR _prev = [Other Cost Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
 			displayFolder: 06 Formatting Colors
 			lineageTag: 0565b766-d90f-4d83-9c9c-4503c9daa950
 
-		/// Conditional color for Payable Click Cost card (Green if lower or equal, Red if higher)
-		measure 'Payable Click Cost Color' = IF([Payable Click Cost] <= [Payable Click Cost Previous Period], "#00A651", "#D13438")
+		measure 'Payable Click Cost Color' =
+				VAR _cur = [Payable Click Cost]
+				VAR _prev = [Payable Click Cost Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
 			displayFolder: 06 Formatting Colors
 			lineageTag: 959341a2-7e7a-45fb-9acb-598468a2b9a6
 
-		/// Conditional color for Total Clicks card (Green if higher or equal, Red if lower)
-		measure 'Total Clicks Color' = IF([Total Clicks] >= [Total Clicks Previous Period], "#00A651", "#D13438")
+		measure 'Total Clicks Color' =
+				VAR _cur = [Total Clicks]
+				VAR _prev = [Total Clicks Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
 			displayFolder: 06 Formatting Colors
 			lineageTag: f02d0580-6820-4b37-b196-80d3b65a62ab
 
-		/// Conditional color for Payable Clicks v2 card (Green if higher or equal, Red if lower)
-		measure 'Payable Clicks v2 Color' = IF([Payable Clicks v2] >= [Payable Clicks v2 Previous Period], "#00A651", "#D13438")
+		measure 'Payable Clicks v2 Color' =
+				VAR _cur = [Payable Clicks v2]
+				VAR _prev = [Payable Clicks v2 Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
 			displayFolder: 06 Formatting Colors
 			lineageTag: 18065b4d-d341-4a9c-ae25-9ebce28d24da
 
-		/// Conditional color for Actions card (Green if higher or equal, Red if lower)
-		measure 'Actions Color' = IF([Actions] >= [Actions Previous Period], "#00A651", "#D13438")
+		measure 'Actions Color' =
+				VAR _cur = [Actions]
+				VAR _prev = [Actions Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
 			displayFolder: 06 Formatting Colors
 			lineageTag: 1ac37526-3de7-45c4-ae2c-9ce141a447b0
 
-		/// Conditional color for CPA card (Green if lower or equal, Red if higher)
-		measure 'CPA Color' = IF([CPA] <= [CPA Previous Period], "#00A651", "#D13438")
+		measure 'CPA Color' =
+				VAR _cur = [CPA]
+				VAR _prev = [CPA Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#D13438",
+				        _cur < _prev, "#00A651",
+				        "#808080"
+				    )
 			displayFolder: 06 Formatting Colors
 			lineageTag: 9a846e8b-12f6-42fb-8bfc-14e4f7fa62aa
 
-		/// Conditional color for # Partners card (Green if higher or equal, Red if lower)
-		measure 'Partners Color' = IF([# Partners] >= [# Partners Previous Period], "#00A651", "#D13438")
+		measure 'Partners Color' =
+				VAR _cur = [# Partners]
+				VAR _prev = [# Partners Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
 			displayFolder: 06 Formatting Colors
 			lineageTag: fe1b2204-0aaa-4946-8f57-50d4814f2aac
 
-		/// Conditional color for CVR card (Green if higher or equal, Red if lower)
-		measure 'CVR Color' = IF([CVR] >= [CVR Previous Period], "#00A651", "#D13438")
+		measure 'CVR Color' =
+				VAR _cur = [CVR]
+				VAR _prev = [CVR Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
 			displayFolder: 06 Formatting Colors
 			lineageTag: 9e42031b-d563-4e45-8ec9-6d8d37a8c936
 
-		/// Current refresh time showing when data was loaded
 		measure 'Refresh Timestamp' = "Data refreshed at: " & FORMAT(NOW(), "MMM DD YYYY HH:MM")
 			displayFolder: 07 Metadata
 			lineageTag: 6e71848f-1524-49bd-8802-e55dd8ebdedc
@@ -611,10 +701,10 @@ createOrReplace
 				    "—",
 				    IF(
 				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "0.0%"),
+				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				        IF(
 				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "0.0%"),
+				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				            "0.0%"
 				        )
 				    )
@@ -641,10 +731,10 @@ createOrReplace
 				    "—",
 				    IF(
 				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "0.0%"),
+				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				        IF(
 				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "0.0%"),
+				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				            "0.0%"
 				        )
 				    )
@@ -653,14 +743,30 @@ createOrReplace
 			lineageTag: 7894efa8-fdb7-41eb-80d5-6db9a0fc2eeb
 
 		measure 'Actions Previous Label' =
-				VAR _prev = COALESCE([Actions Previous Period], 0)
+				VAR _prev = [Actions Previous Period]
 				RETURN
-				"vs previous: " &
-				switch(true(), abs(_prev)>= 1000000,FORMAT(_prev / 1000000, "$#,##0.0M"), ABS(_prev) >= 1000, FOrMAT(_prev/1000, "$#,##0K"),FORMAT(_prev,"$#,##0"))
+				    "vs previous: " &
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "N/A",
+				        ABS(_prev) >= 1000000, FORMAT(_prev / 1000000, "#,##0.0M"),
+				        ABS(_prev) >= 1000, FORMAT(_prev / 1000, "#,##0.0K"),
+				        FORMAT(_prev, "#,##0")
+				    )
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 24e3b395-6abf-4b12-922a-d7a5669c971c
 
-		measure 'Actions Label Color' = IF([Actions] >= [Actions Previous Period], "#00A651", "#D13438")
+		measure 'Actions Label Color' =
+				VAR _cur = [Actions]
+				VAR _prev = [Actions Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 99c4d651-8e64-41ee-8c1b-578a4146a999
 
@@ -674,10 +780,10 @@ createOrReplace
 				    "—",
 				    IF(
 				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "0.0%"),
+				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				        IF(
 				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "0.0%"),
+				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				            "0.0%"
 				        )
 				    )
@@ -689,7 +795,17 @@ createOrReplace
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 515c4465-e0b3-463a-9c59-05e95553da5a
 
-		measure 'CPA Label Color' = IF([CPA] > [CPA Previous Period], "#D13438", "#00A651")
+		measure 'CPA Label Color' =
+				VAR _cur = [CPA]
+				VAR _prev = [CPA Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#D13438",
+				        _cur < _prev, "#00A651",
+				        "#808080"
+				    )
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 004b0849-2a87-43ad-af79-ff20182604de
 
@@ -703,10 +819,10 @@ createOrReplace
 				    "—",
 				    IF(
 				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "0.0%"),
+				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				        IF(
 				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "0.0%"),
+				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				            "0.0%"
 				        )
 				    )
@@ -716,15 +832,30 @@ createOrReplace
 			lineageTag: 9d73ba06-70c0-4b11-8cb5-31ebbe8c83c7
 
 		measure 'Total Clicks Previous Label' =
-				
 				VAR _prev = [Total Clicks Previous Period]
 				RETURN
-				"vs previous: " &
-				switch(true(), abs(_prev)>= 1000000,FORMAT(_prev / 1000000, "$#,##0.0M"), ABS(_prev) >= 1000, FOrMAT(_prev/1000, "$#,##0K"),FORMAT(_prev,"$#,##0"))
+				    "vs previous: " &
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "N/A",
+				        ABS(_prev) >= 1000000, FORMAT(_prev / 1000000, "#,##0.0M"),
+				        ABS(_prev) >= 1000, FORMAT(_prev / 1000, "#,##0.0K"),
+				        FORMAT(_prev, "#,##0")
+				    )
 			displayFolder: 07 KPI Card Labels
 			lineageTag: aef2f923-84b1-454a-bf50-e3c2bf25869e
 
-		measure 'Total Clicks Label Color' = IF([Total Clicks] >= [Total Clicks Previous Period], "#00A651", "#D13438")
+		measure 'Total Clicks Label Color' =
+				VAR _cur = [Total Clicks]
+				VAR _prev = [Total Clicks Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
 			displayFolder: 07 KPI Card Labels
 			lineageTag: dc05d13e-f84c-42ad-b35f-4e8e5312b9d9
 
@@ -745,7 +876,17 @@ createOrReplace
 			displayFolder: 07 KPI Card Labels
 			lineageTag: e08dfaf0-98ed-4a88-8fa4-a2405228fb97
 
-		measure 'CVR Label Color' = IF([CVR] >= [CVR Previous Period], "#00A651", "#D13438")
+		measure 'CVR Label Color' =
+				VAR _cur = [CVR]
+				VAR _prev = [CVR Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 493a721b-78aa-4c7a-bc55-d034fb4194dd
 
@@ -759,10 +900,10 @@ createOrReplace
 				    "—",
 				    IF(
 				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "0.0%"),
+				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				        IF(
 				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "0.0%"),
+				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				            "0.0%"
 				        )
 				    )
@@ -778,7 +919,17 @@ createOrReplace
 			displayFolder: 07 KPI Card Labels
 			lineageTag: b1951681-3101-4ca8-890a-af8b179da4d8
 
-		measure 'Action Cost Label Color' = IF([Action Cost] > [Action Cost Previous Period], "#D13438", "#00A651")
+		measure 'Action Cost Label Color' =
+				VAR _cur = [Action Cost]
+				VAR _prev = [Action Cost Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
 			displayFolder: 07 KPI Card Labels
 			lineageTag: e9c65fe2-ddb2-445b-ab1b-9f44248b5f69
 
@@ -792,10 +943,10 @@ createOrReplace
 				    "—",
 				    IF(
 				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "0.0%"),
+				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				        IF(
 				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "0.0%"),
+				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				            "0.0%"
 				        )
 				    )
@@ -811,7 +962,17 @@ createOrReplace
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 1a814cfb-4247-4be7-8aa4-6e2aeeae65c5
 
-		measure 'Other Cost Label Color' = IF([Other Cost] > [Other Cost Previous Period], "#D13438", "#00A651")
+		measure 'Other Cost Label Color' =
+				VAR _cur = [Other Cost]
+				VAR _prev = [Other Cost Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 49f6506b-a14f-4f7f-8de6-8e45cafaacb4
 
@@ -825,10 +986,10 @@ createOrReplace
 				    "—",
 				    IF(
 				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "0.0%"),
+				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				        IF(
 				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "0.0%"),
+				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				            "0.0%"
 				        )
 				    )
@@ -844,7 +1005,17 @@ createOrReplace
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 089f229f-96b8-4c58-9351-3ee6e49aa371
 
-		measure 'Payable Click Cost Label Color' = IF([Payable Click Cost] > [Payable Click Cost Previous Period], "#D13438", "#00A651")
+		measure 'Payable Click Cost Label Color' =
+				VAR _cur = [Payable Click Cost]
+				VAR _prev = [Payable Click Cost Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 8fdf78bb-d8b7-445c-8cd3-45e6aa6cc568
 
@@ -858,10 +1029,10 @@ createOrReplace
 				    "—",
 				    IF(
 				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "0.0%"),
+				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				        IF(
 				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "0.0%"),
+				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				            "0.0%"
 				        )
 				    )
@@ -878,7 +1049,17 @@ createOrReplace
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 8c16e51b-adc6-416a-9062-f25d1d1653d5
 
-		measure 'Payable Clicks Label Color' = IF([Payable Clicks v2] >= [Payable Clicks v2 Previous Period], "#00A651", "#D13438")
+		measure 'Payable Clicks Label Color' =
+				VAR _cur = [Payable Clicks v2]
+				VAR _prev = [Payable Clicks v2 Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 2d5e0127-7239-45fd-ba2b-064d893e6a2d
 
@@ -892,10 +1073,10 @@ createOrReplace
 				    "—",
 				    IF(
 				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "0.0%"),
+				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				        IF(
 				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "0.0%"),
+				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				            "0.0%"
 				        )
 				    )
@@ -907,7 +1088,17 @@ createOrReplace
 			displayFolder: 07 KPI Card Labels
 			lineageTag: aa19833a-7c68-4e9c-91cd-3fd5f9d97fff
 
-		measure 'Partners Label Color' = IF([# Partners] >= [# Partners Previous Period], "#00A651", "#D13438")
+		measure 'Partners Label Color' =
+				VAR _cur = [# Partners]
+				VAR _prev = [# Partners Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
 			displayFolder: 07 KPI Card Labels
 			lineageTag: c4148de3-ed08-4b11-9e9d-5f451e408f1c
 
@@ -1151,10 +1342,10 @@ createOrReplace
 				    "—",
 				    IF(
 				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "0.0%"),
+				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				        IF(
 				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "0.0%"),
+				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				            "0.0%"
 				        )
 				    )
@@ -1163,8 +1354,16 @@ createOrReplace
 			lineageTag: 80ef669a-cd08-4cf7-b981-0f72e0245530
 
 		measure '$/Order Label Color' =
-				
-				IF([$/Order] >= [$/Order Previous Period], "#D13438", "#00A651")
+				VAR _cur = [$/Order]
+				VAR _prev = [$/Order Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#D13438",
+				        _cur < _prev, "#00A651",
+				        "#808080"
+				    )
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 70ecb185-7b83-4d7a-8049-1f4c8dd5b9d0
 
@@ -1185,10 +1384,10 @@ createOrReplace
 				    "—",
 				    IF(
 				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "0.0%"),
+				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				        IF(
 				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "0.0%"),
+				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				            "0.0%"
 				        )
 				    )
@@ -1197,8 +1396,16 @@ createOrReplace
 			lineageTag: d70051cb-630f-450b-bdb9-ebccd661246a
 
 		measure 'CpEC Label Color' =
-				
-				IF([CpEC] >= [CpEC Previous Period], "#D13438", "#00A651")
+				VAR _cur = [CpEC]
+				VAR _prev = [CpEC Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#D13438",
+				        _cur < _prev, "#00A651",
+				        "#808080"
+				    )
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 03feeafc-a95d-48e8-969e-ca1c9b6c0cc7
 
@@ -1219,10 +1426,10 @@ createOrReplace
 				    "—",
 				    IF(
 				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "0.0%"),
+				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				        IF(
 				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "0.0%"),
+				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				            "0.0%"
 				        )
 				    )
@@ -1231,8 +1438,16 @@ createOrReplace
 			lineageTag: 5c4eeed6-94f0-4bf1-92b6-e87ef7dd7c5d
 
 		measure 'CpSEC Label Color' =
-				
-				IF([CpSEC] >= [CpSEC Previous Period], "#D13438", "#00A651")
+				VAR _cur = [CpSEC]
+				VAR _prev = [CpSEC Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#D13438",
+				        _cur < _prev, "#00A651",
+				        "#808080"
+				    )
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 3c3b5266-9a3e-4c5e-83bc-008b6531bb68
 
@@ -1253,10 +1468,10 @@ createOrReplace
 				    "—",
 				    IF(
 				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "0.0%"),
+				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				        IF(
 				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "0.0%"),
+				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				            "0.0%"
 				        )
 				    )
@@ -1265,23 +1480,232 @@ createOrReplace
 			lineageTag: adbd91d1-4b60-4292-bcbe-52f68f915014
 
 		measure 'CpOrder Label Color' =
-				
-				IF([CpOrder] >= [CpOrder Previous Period], "#D13438", "#00A651")
+				VAR _cur = [CpOrder]
+				VAR _prev = [CpOrder Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#D13438",
+				        _cur < _prev, "#00A651",
+				        "#808080"
+				    )
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 336ae68b-f205-418b-9fde-550fd8cdcd22
 
 		measure 'Total Clicks Label' =
-				
-				VAR _v = SUM(fact_ad_performance[total_clicks])
+				VAR _v = [Total Clicks]
 				RETURN
-				SWITCH(
-				    TRUE(),
-				    ABS(_v) >= 1000000, FORMAT(_v / 1000000, "$#,##0.0M"),
-				    ABS(_v) >= 1000, FORMAT(_v / 1000, "$#,##0K"),
-				    FORMAT(_v, "#,##0")
-				)
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_v), BLANK(),
+				        ABS(_v) >= 1000000, FORMAT(_v / 1000000, "#,##0.0M"),
+				        ABS(_v) >= 1000, FORMAT(_v / 1000, "#,##0.0K"),
+				        FORMAT(_v, "#,##0")
+				    )
 			displayFolder: 02 Click KPIs
 			lineageTag: 40f9b29b-9d52-4a3f-bb59-eb1149851d9f
+
+		/// Previous-period value for TFB Lead Actions
+		measure 'TFB Lead Actions Previous Period' =
+				VAR MaxDate = MAX(dim_date[date])
+				VAR MinDate = MIN(dim_date[date])
+				VAR DateRange = MaxDate - MinDate
+				VAR PrevStartDate = MinDate - DateRange - 1
+				VAR PrevEndDate = MaxDate - DateRange - 1
+				RETURN
+				    IF(
+				        ISBLANK(MaxDate),
+				        BLANK(),
+				        CALCULATE(
+				            [TFB Lead Actions],
+				            REMOVEFILTERS(dim_date),
+				            DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
+				        )
+				    )
+			formatString: #,##0
+			displayFolder: 13 TFB Metrics
+			lineageTag: 6d03c9e3-f715-4e64-98bc-7ceffbedacdf
+
+		measure 'TFB Lead Previous Label' =
+				VAR _prev = [TFB Lead Actions Previous Period]
+				RETURN
+				    "vs previous: " &
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "N/A",
+				        ABS(_prev) >= 1000000, FORMAT(_prev / 1000000, "#,##0.0M"),
+				        ABS(_prev) >= 1000, FORMAT(_prev / 1000, "#,##0.0K"),
+				        FORMAT(_prev, "#,##0")
+				    )
+			displayFolder: 07 KPI Card Labels
+			lineageTag: 943b775b-6807-4d07-9714-ffbafaa8ff33
+
+		measure 'TFB Lead Change Label' =
+				VAR _cur = [TFB Lead Actions]
+				VAR _prev = [TFB Lead Actions Previous Period]
+				VAR _pct = DIVIDE(_cur - _prev, _prev)
+				RETURN
+				    IF(
+				        ISBLANK(_pct),
+				        "—",
+				        SWITCH(
+				            TRUE(),
+				            _cur > _prev, "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
+				            _cur < _prev, "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
+				            "0.0%"
+				        )
+				    )
+			displayFolder: 07 KPI Card Labels
+			lineageTag: a2d42e62-1fe1-426e-9d37-8a8916459dc0
+
+		measure 'TFB Lead Label Color' =
+				VAR _cur = [TFB Lead Actions]
+				VAR _prev = [TFB Lead Actions Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
+			displayFolder: 07 KPI Card Labels
+			lineageTag: b132a7f9-7c37-4ef3-a7d7-222164097054
+
+		/// Previous-period value for TFB Mid Funnel Actions
+		measure 'TFB Mid Funnel Actions Previous Period' =
+				VAR MaxDate = MAX(dim_date[date])
+				VAR MinDate = MIN(dim_date[date])
+				VAR DateRange = MaxDate - MinDate
+				VAR PrevStartDate = MinDate - DateRange - 1
+				VAR PrevEndDate = MaxDate - DateRange - 1
+				RETURN
+				    IF(
+				        ISBLANK(MaxDate),
+				        BLANK(),
+				        CALCULATE(
+				            [TFB Mid Funnel Actions],
+				            REMOVEFILTERS(dim_date),
+				            DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
+				        )
+				    )
+			formatString: #,##0
+			displayFolder: 13 TFB Metrics
+			lineageTag: caf2af92-3aa0-47c9-81c3-6c8f717108b6
+
+		measure 'TFB Mid Funnel Previous Label' =
+				VAR _prev = [TFB Mid Funnel Actions Previous Period]
+				RETURN
+				    "vs previous: " &
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "N/A",
+				        ABS(_prev) >= 1000000, FORMAT(_prev / 1000000, "#,##0.0M"),
+				        ABS(_prev) >= 1000, FORMAT(_prev / 1000, "#,##0.0K"),
+				        FORMAT(_prev, "#,##0")
+				    )
+			displayFolder: 07 KPI Card Labels
+			lineageTag: 5a42c04b-08ea-44d0-a3df-b3c0d25356c7
+
+		measure 'TFB Mid Funnel Change Label' =
+				VAR _cur = [TFB Mid Funnel Actions]
+				VAR _prev = [TFB Mid Funnel Actions Previous Period]
+				VAR _pct = DIVIDE(_cur - _prev, _prev)
+				RETURN
+				    IF(
+				        ISBLANK(_pct),
+				        "—",
+				        SWITCH(
+				            TRUE(),
+				            _cur > _prev, "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
+				            _cur < _prev, "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
+				            "0.0%"
+				        )
+				    )
+			displayFolder: 07 KPI Card Labels
+			lineageTag: 139f64ee-b0ea-4789-8f0f-32617fbc5220
+
+		measure 'TFB Mid Funnel Label Color' =
+				VAR _cur = [TFB Mid Funnel Actions]
+				VAR _prev = [TFB Mid Funnel Actions Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
+			displayFolder: 07 KPI Card Labels
+			lineageTag: 0bcacff3-e116-4ca3-bd9d-485ef6d164a4
+
+		/// Previous-period value for TFB HINT EC Actions
+		measure 'TFB HINT EC Actions Previous Period' =
+				VAR MaxDate = MAX(dim_date[date])
+				VAR MinDate = MIN(dim_date[date])
+				VAR DateRange = MaxDate - MinDate
+				VAR PrevStartDate = MinDate - DateRange - 1
+				VAR PrevEndDate = MaxDate - DateRange - 1
+				RETURN
+				    IF(
+				        ISBLANK(MaxDate),
+				        BLANK(),
+				        CALCULATE(
+				            [TFB HINT EC Actions],
+				            REMOVEFILTERS(dim_date),
+				            DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
+				        )
+				    )
+			formatString: #,##0
+			displayFolder: 13 TFB Metrics
+			lineageTag: b6db7c07-c289-4853-8acd-beb9669bdafb
+
+		measure 'TFB HINT EC Previous Label' =
+				VAR _prev = [TFB HINT EC Actions Previous Period]
+				RETURN
+				    "vs previous: " &
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "N/A",
+				        ABS(_prev) >= 1000000, FORMAT(_prev / 1000000, "#,##0.0M"),
+				        ABS(_prev) >= 1000, FORMAT(_prev / 1000, "#,##0.0K"),
+				        FORMAT(_prev, "#,##0")
+				    )
+			displayFolder: 07 KPI Card Labels
+			lineageTag: d8ef2411-3868-48ca-b66e-92d3853fe616
+
+		measure 'TFB HINT EC Change Label' =
+				VAR _cur = [TFB HINT EC Actions]
+				VAR _prev = [TFB HINT EC Actions Previous Period]
+				VAR _pct = DIVIDE(_cur - _prev, _prev)
+				RETURN
+				    IF(
+				        ISBLANK(_pct),
+				        "—",
+				        SWITCH(
+				            TRUE(),
+				            _cur > _prev, "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
+				            _cur < _prev, "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
+				            "0.0%"
+				        )
+				    )
+			displayFolder: 07 KPI Card Labels
+			lineageTag: 2e1d4073-f716-4d4e-91d5-a2f83f78cda2
+
+		measure 'TFB HINT EC Label Color' =
+				VAR _cur = [TFB HINT EC Actions]
+				VAR _prev = [TFB HINT EC Actions Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
+			displayFolder: 07 KPI Card Labels
+			lineageTag: ac5b94db-755a-45ea-a796-86d66b7690db
 
 		measure 'CpL Previous Period' =
 				VAR MaxDate = MAX(dim_date[date])
@@ -1328,10 +1752,10 @@ createOrReplace
 				    "—",
 				    IF(
 				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "0.0%"),
+				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				        IF(
 				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "0.0%"),
+				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				            "0.0%"
 				        )
 				    )
@@ -1339,7 +1763,17 @@ createOrReplace
 			displayFolder: 07 KPI Card Labels
 			lineageTag: c4425b1e-60d9-44c4-8b4b-202027a122f6
 
-		measure 'CpL Label Color' = IF([CpL] > [CpL Previous Period], "#D13438", "#00A651")
+		measure 'CpL Label Color' =
+				VAR _cur = [CpL]
+				VAR _prev = [CpL Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#D13438",
+				        _cur < _prev, "#00A651",
+				        "#808080"
+				    )
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 2981123e-72cb-4e05-93ce-dd003a6c03c9
 
@@ -1387,10 +1821,10 @@ createOrReplace
 				    "—",
 				    IF(
 				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "0.0%"),
+				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				        IF(
 				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "0.0%"),
+				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				            "0.0%"
 				        )
 				    )
@@ -1398,7 +1832,17 @@ createOrReplace
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 354de0e0-83fc-489b-ada8-83b4514c275e
 
-		measure 'CpMid Funnel Label Color' = IF([CpMid Funnel] > [CpMid Funnel Previous Period], "#D13438", "#00A651")
+		measure 'CpMid Funnel Label Color' =
+				VAR _cur = [CpMid Funnel]
+				VAR _prev = [CpMid Funnel Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#D13438",
+				        _cur < _prev, "#00A651",
+				        "#808080"
+				    )
 			displayFolder: 07 KPI Card Labels
 			lineageTag: bfb52f88-46b8-4bf7-ad1e-b898e1c94337
 
@@ -1446,10 +1890,10 @@ createOrReplace
 				    "—",
 				    IF(
 				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "0.0%"),
+				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				        IF(
 				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "0.0%"),
+				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
 				            "0.0%"
 				        )
 				    )
@@ -1457,7 +1901,17 @@ createOrReplace
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 5b864a2b-fb1b-4398-8e95-a5e52fce2ad1
 
-		measure 'CpTFB HINT EC Label Color' = IF([CpTFB HINT EC] > [CpTFB HINT EC Previous Period], "#D13438", "#00A651")
+		measure 'CpTFB HINT EC Label Color' =
+				VAR _cur = [CpTFB HINT EC]
+				VAR _prev = [CpTFB HINT EC Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#D13438",
+				        _cur < _prev, "#00A651",
+				        "#808080"
+				    )
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 8f17243d-41ac-4b4f-b737-34cc78d29fc3
 
@@ -1498,7 +1952,17 @@ createOrReplace
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 06bce398-7e0b-441c-be35-1d536ebf6daf
 
-		measure 'TFB HINT EC CVR Label Color' = IF([TFB HINT EC CVR] >= [TFB HINT EC CVR Previous Period], "#00A651", "#D13438")
+		measure 'TFB HINT EC CVR Label Color' =
+				VAR _cur = [TFB HINT EC CVR]
+				VAR _prev = [TFB HINT EC CVR Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 619a66a5-88c9-400f-a2df-f90af7571454
 
@@ -1539,7 +2003,17 @@ createOrReplace
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 93315cf0-463b-4bf4-9e2b-90355d2a701d
 
-		measure 'TFB Lead CVR Label Color' = IF([TFB Lead CVR] >= [TFB Lead CVR Previous Period], "#00A651", "#D13438")
+		measure 'TFB Lead CVR Label Color' =
+				VAR _cur = [TFB Lead CVR]
+				VAR _prev = [TFB Lead CVR Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
 			displayFolder: 07 KPI Card Labels
 			lineageTag: db547837-d6fb-4db9-8d21-552efd637969
 
@@ -1580,7 +2054,17 @@ createOrReplace
 			displayFolder: 07 KPI Card Labels
 			lineageTag: 85e4ec80-5089-43ce-9b95-4ee4f234f452
 
-		measure 'TFB Mid Funnel CVR Label Color' = IF([TFB Mid Funnel CVR] >= [TFB Mid Funnel CVR Previous Period], "#00A651", "#D13438")
+		measure 'TFB Mid Funnel CVR Label Color' =
+				VAR _cur = [TFB Mid Funnel CVR]
+				VAR _prev = [TFB Mid Funnel CVR Previous Period]
+				RETURN
+				    SWITCH(
+				        TRUE(),
+				        ISBLANK(_prev), "#808080",
+				        _cur > _prev, "#00A651",
+				        _cur < _prev, "#D13438",
+				        "#808080"
+				    )
 			displayFolder: 07 KPI Card Labels
 			lineageTag: e2d4e96c-56d7-48f1-9532-1c8a8b96172b
 
@@ -1645,4 +2129,3 @@ createOrReplace
 		partition KPI = calculated
 			mode: import
 			source = { ROW("MeasureID", 1) }
-
