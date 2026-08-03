@@ -1,2110 +1,1291 @@
 createOrReplace
 
 	table KPI
-		isHidden
-		lineageTag: 37c5a6af-161c-4fe7-97d7-655fd352dfe1
+		lineageTag: 5ed05ef6-8836-43ca-8227-6822b7b3f69a
+		sourceLineageTag: 37c5a6af-161c-4fe7-97d7-655fd352dfe1
 
-		measure 'Total Cost' = SUM(fact_ad_performance[payable_click_cost_cpc_v2]) + SUM(fact_ad_performance[other_cost]) + SUM(fact_action_details[action_cost])
+		measure 'Total Cost' = EXTERNALMEASURE("Total Cost", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.0
 			displayFolder: 01 Cost KPIs
-			lineageTag: 21033e67-0c18-4932-adcb-c31bf7e45a42
+			lineageTag: 20370826-22da-4517-9d02-902beecfeb3d
+			sourceLineageTag: 21033e67-0c18-4932-adcb-c31bf7e45a42
+			dataCategory: Uncategorized
 
-			annotation PBI_FormatHint = {"isCustom":true}
-
-		measure 'Total Cost Previous Period' =
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				    IF(
-				        ISBLANK(MaxDate),
-				        BLANK(),
-				        CALCULATE(
-				            [Total Cost],
-				            DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
-				        )
-				    )
+		measure 'Total Cost Previous Period' = EXTERNALMEASURE("Total Cost Previous Period", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.00
 			displayFolder: 01 Cost KPIs
-			lineageTag: fd352069-f96f-47ff-8e41-c930ad9265b1
+			lineageTag: 82793bd0-82d7-465c-9dcf-2e9f55a5001e
+			sourceLineageTag: fd352069-f96f-47ff-8e41-c930ad9265b1
+			dataCategory: Uncategorized
 
-		measure 'Total Cost Variance vs Previous' = [Total Cost] - [Total Cost Previous Period]
+		measure 'Total Cost Variance vs Previous' = EXTERNALMEASURE("Total Cost Variance vs Previous", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.00
 			displayFolder: 01 Cost KPIs
-			lineageTag: 18565a06-511a-4421-b14e-23e1c561bef8
+			lineageTag: 1add6ed7-e507-4e84-b2be-64882318618d
+			sourceLineageTag: 18565a06-511a-4421-b14e-23e1c561bef8
+			dataCategory: Uncategorized
 
-		measure 'Total Cost % Change vs Previous' = DIVIDE([Total Cost Variance vs Previous], [Total Cost Previous Period], BLANK())
+		measure 'Total Cost % Change vs Previous' = EXTERNALMEASURE("Total Cost % Change vs Previous", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0.00%
 			displayFolder: 01 Cost KPIs
-			lineageTag: 6626d71c-54d7-4c19-84a6-8b0e02bc1fdc
+			lineageTag: 7edf47e1-27b7-41c0-aa60-9dbcc39293cd
+			sourceLineageTag: 6626d71c-54d7-4c19-84a6-8b0e02bc1fdc
+			dataCategory: Uncategorized
 
-		measure 'Action Cost' = SUM(fact_action_details[action_cost])
+		measure 'Action Cost' = EXTERNALMEASURE("Action Cost", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.0
 			displayFolder: 01 Cost KPIs
-			lineageTag: 30709607-2069-4300-984d-81e6b6d6b7f5
+			lineageTag: ef79278e-0362-4c4e-9f67-2040cd0143c9
+			sourceLineageTag: 30709607-2069-4300-984d-81e6b6d6b7f5
+			dataCategory: Uncategorized
 
-			annotation PBI_FormatHint = {"isCustom":true}
-
-		measure 'Action Cost Previous Period' =
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				    IF(
-				        ISBLANK(MaxDate),
-				        BLANK(),
-				        CALCULATE(
-				            [Action Cost],
-				            DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
-				        )
-				    )
+		measure 'Action Cost Previous Period' = EXTERNALMEASURE("Action Cost Previous Period", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.00
 			displayFolder: 01 Cost KPIs
-			lineageTag: fd234c57-7666-4a58-b5b1-2c8c1a3f45b6
+			lineageTag: dcd82c5d-d1f0-44eb-addb-782b2e462255
+			sourceLineageTag: fd234c57-7666-4a58-b5b1-2c8c1a3f45b6
+			dataCategory: Uncategorized
 
-		measure 'Action Cost Variance vs Previous' = [Action Cost] - [Action Cost Previous Period]
+		measure 'Action Cost Variance vs Previous' = EXTERNALMEASURE("Action Cost Variance vs Previous", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.00
 			displayFolder: 01 Cost KPIs
-			lineageTag: a5958e97-9a50-4908-ab4a-dc6650869d72
+			lineageTag: 931df5f8-c30a-4c78-a9e0-52b7232fe84a
+			sourceLineageTag: a5958e97-9a50-4908-ab4a-dc6650869d72
+			dataCategory: Uncategorized
 
-		measure 'Action Cost % Change vs Previous' = DIVIDE([Action Cost Variance vs Previous], [Action Cost Previous Period], BLANK())
+		measure 'Action Cost % Change vs Previous' = EXTERNALMEASURE("Action Cost % Change vs Previous", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0.00%
 			displayFolder: 01 Cost KPIs
-			lineageTag: ea4f0be2-69cf-4816-a813-d01c4694f054
+			lineageTag: c6357dbd-f85d-418e-a160-0294837b9ed0
+			sourceLineageTag: ea4f0be2-69cf-4816-a813-d01c4694f054
+			dataCategory: Uncategorized
 
-		measure 'Other Cost' = SUM(fact_ad_performance[other_cost])
+		measure 'Other Cost' = EXTERNALMEASURE("Other Cost", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.0
 			displayFolder: 01 Cost KPIs
-			lineageTag: 2298a54a-7f91-4611-b338-545078ceebe6
+			lineageTag: 7fc20063-fb15-45f8-b327-909fd07250df
+			sourceLineageTag: 2298a54a-7f91-4611-b338-545078ceebe6
+			dataCategory: Uncategorized
 
-			annotation PBI_FormatHint = {"isCustom":true}
-
-		measure 'Other Cost Previous Period' =
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				    IF(
-				        ISBLANK(MaxDate),
-				        BLANK(),
-				        CALCULATE(
-				            [Other Cost],
-				            DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
-				        )
-				    )
+		measure 'Other Cost Previous Period' = EXTERNALMEASURE("Other Cost Previous Period", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.00
 			displayFolder: 01 Cost KPIs
-			lineageTag: a37e239f-3e31-437e-a504-35ffc70ad7c5
+			lineageTag: fd826954-f916-4214-95da-861cef63804c
+			sourceLineageTag: a37e239f-3e31-437e-a504-35ffc70ad7c5
+			dataCategory: Uncategorized
 
-		measure 'Other Cost Variance vs Previous' = [Other Cost] - [Other Cost Previous Period]
+		measure 'Other Cost Variance vs Previous' = EXTERNALMEASURE("Other Cost Variance vs Previous", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.00
 			displayFolder: 01 Cost KPIs
-			lineageTag: 1776e40f-5622-4193-8c75-f0f9b9292f5e
+			lineageTag: 3fa589e5-c988-4dc7-8db8-c3b2e0678c06
+			sourceLineageTag: 1776e40f-5622-4193-8c75-f0f9b9292f5e
+			dataCategory: Uncategorized
 
-		measure 'Other Cost % Change vs Previous' = DIVIDE([Other Cost Variance vs Previous], [Other Cost Previous Period], BLANK())
+		measure 'Other Cost % Change vs Previous' = EXTERNALMEASURE("Other Cost % Change vs Previous", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0.00%
 			displayFolder: 01 Cost KPIs
-			lineageTag: aa77a4e6-5412-4ebe-8175-31aa12172539
+			lineageTag: cadc90c4-5290-4482-8a4a-098ee4259d5f
+			sourceLineageTag: aa77a4e6-5412-4ebe-8175-31aa12172539
+			dataCategory: Uncategorized
 
-		measure 'Payable Click Cost' = SUM(fact_ad_performance[payable_click_cost_cpc_v2])
+		measure 'Payable Click Cost' = EXTERNALMEASURE("Payable Click Cost", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.0
 			displayFolder: 01 Cost KPIs
-			lineageTag: e036bc1a-1e16-40cd-bb19-04c21842eeee
+			lineageTag: 5e27c1ad-de98-4b0f-9a55-94cb9ff66530
+			sourceLineageTag: e036bc1a-1e16-40cd-bb19-04c21842eeee
+			dataCategory: Uncategorized
 
-			annotation PBI_FormatHint = {"isCustom":true}
-
-		measure 'Payable Click Cost Previous Period' =
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				    IF(
-				        ISBLANK(MaxDate),
-				        BLANK(),
-				        CALCULATE(
-				            [Payable Click Cost],
-				            DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
-				        )
-				    )
+		measure 'Payable Click Cost Previous Period' = EXTERNALMEASURE("Payable Click Cost Previous Period", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.00
 			displayFolder: 01 Cost KPIs
-			lineageTag: d6363516-fd47-4ce7-8f17-246c2f5aedbe
+			lineageTag: e0ce0b0d-1162-4565-adaa-8d973129184c
+			sourceLineageTag: d6363516-fd47-4ce7-8f17-246c2f5aedbe
+			dataCategory: Uncategorized
 
-		measure 'Payable Click Cost Variance vs Previous' = [Payable Click Cost] - [Payable Click Cost Previous Period]
+		measure 'Payable Click Cost Variance vs Previous' = EXTERNALMEASURE("Payable Click Cost Variance vs Previous", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.00
 			displayFolder: 01 Cost KPIs
-			lineageTag: 2784c9d8-19a0-4e68-a461-a5ab62cb20ce
+			lineageTag: b19f45c0-f999-4178-9be2-817beec9e606
+			sourceLineageTag: 2784c9d8-19a0-4e68-a461-a5ab62cb20ce
+			dataCategory: Uncategorized
 
-		measure 'Payable Click Cost % Change vs Previous' = DIVIDE([Payable Click Cost Variance vs Previous], [Payable Click Cost Previous Period], BLANK())
+		measure 'Payable Click Cost % Change vs Previous' = EXTERNALMEASURE("Payable Click Cost % Change vs Previous", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0.00%
 			displayFolder: 01 Cost KPIs
-			lineageTag: d1a24314-39fd-4cea-af84-adf0bdc1c096
+			lineageTag: 5cdfef90-7b17-4487-a418-fb9e1d722fb6
+			sourceLineageTag: d1a24314-39fd-4cea-af84-adf0bdc1c096
+			dataCategory: Uncategorized
 
-		measure 'Total Clicks' =
-				
-				COALESCE(
-				    SUM(fact_ad_performance[total_clicks]),
-				    0
-				)
+		measure 'Total Clicks' = EXTERNALMEASURE("Total Clicks", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 02 Click KPIs
-			lineageTag: bcc5898a-7cdd-4581-95c9-ba86dbeec549
+			lineageTag: 2c798153-d61c-4939-bde6-2280d0b00ff2
+			sourceLineageTag: bcc5898a-7cdd-4581-95c9-ba86dbeec549
+			dataCategory: Uncategorized
 
-			annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-		measure 'Total Clicks Previous Period' =
-				
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				IF(
-				    ISBLANK(MaxDate),
-				    BLANK(),
-				    CALCULATE(
-				        [Total Clicks],
-				        REMOVEFILTERS(dim_date),
-				        DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
-				    )
-				)
+		measure 'Total Clicks Previous Period' = EXTERNALMEASURE("Total Clicks Previous Period", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0
 			displayFolder: 02 Click KPIs
-			lineageTag: fda42464-d816-4bed-852b-e6befd16581f
+			lineageTag: 09fdf074-3b51-42f8-917a-d8e78145d43c
+			sourceLineageTag: fda42464-d816-4bed-852b-e6befd16581f
+			dataCategory: Uncategorized
 
-		measure 'Total Clicks Variance vs Previous' = [Total Clicks] - [Total Clicks Previous Period]
+		measure 'Total Clicks Variance vs Previous' = EXTERNALMEASURE("Total Clicks Variance vs Previous", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 02 Click KPIs
-			lineageTag: a2ecee30-f2a1-414d-908e-11944f3125c1
+			lineageTag: 14f1e0e1-7179-4462-b985-cbdc5018218e
+			sourceLineageTag: a2ecee30-f2a1-414d-908e-11944f3125c1
+			dataCategory: Uncategorized
 
-		measure 'Total Clicks % Change vs Previous' = DIVIDE([Total Clicks Variance vs Previous], [Total Clicks Previous Period], BLANK())
+		measure 'Total Clicks % Change vs Previous' = EXTERNALMEASURE("Total Clicks % Change vs Previous", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0.00%
 			displayFolder: 02 Click KPIs
-			lineageTag: 9441c54e-6840-430d-9f31-2f5c56b09362
+			lineageTag: 4cec07b7-6776-4388-9b3b-29b9e05753c2
+			sourceLineageTag: 9441c54e-6840-430d-9f31-2f5c56b09362
+			dataCategory: Uncategorized
 
-		measure 'Payable Clicks v2' = SUM(fact_ad_performance[payable_clicks_v2])
+		measure 'Payable Clicks v2' = EXTERNALMEASURE("Payable Clicks v2", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 02 Click KPIs
-			lineageTag: da8a0144-9864-4a8e-824d-b5a09d64a608
+			lineageTag: 98e89eae-5223-4dda-aecc-7775ad48496d
+			sourceLineageTag: da8a0144-9864-4a8e-824d-b5a09d64a608
+			dataCategory: Uncategorized
 
-		measure 'Payable Clicks v2 Previous Period' =
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				    IF(
-				        ISBLANK(MaxDate),
-				        BLANK(),
-				        CALCULATE(
-				            [Payable Clicks v2],
-				            DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
-				        )
-				    )
+		measure 'Payable Clicks v2 Previous Period' = EXTERNALMEASURE("Payable Clicks v2 Previous Period", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 02 Click KPIs
-			lineageTag: 24276bac-a891-451c-ba95-24a5bc5ccf9f
+			lineageTag: 0113c346-71cb-409a-a9d2-e94adaf36d7a
+			sourceLineageTag: 24276bac-a891-451c-ba95-24a5bc5ccf9f
+			dataCategory: Uncategorized
 
-		measure 'Payable Clicks v2 Variance vs Previous' = [Payable Clicks v2] - [Payable Clicks v2 Previous Period]
+		measure 'Payable Clicks v2 Variance vs Previous' = EXTERNALMEASURE("Payable Clicks v2 Variance vs Previous", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 02 Click KPIs
-			lineageTag: be740db7-4d3c-43e9-ac1c-e24ff9eb3996
+			lineageTag: d0d71ebb-33f7-41ef-bcbb-93f5641ad27b
+			sourceLineageTag: be740db7-4d3c-43e9-ac1c-e24ff9eb3996
+			dataCategory: Uncategorized
 
-		measure 'Payable Clicks v2 % Change vs Previous' = DIVIDE([Payable Clicks v2 Variance vs Previous], [Payable Clicks v2 Previous Period], BLANK())
+		measure 'Payable Clicks v2 % Change vs Previous' = EXTERNALMEASURE("Payable Clicks v2 % Change vs Previous", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0.00%
 			displayFolder: 02 Click KPIs
-			lineageTag: a787c771-7740-4002-ae5a-1ae108f9e4f2
+			lineageTag: ae7e0af6-5c41-41da-9f69-ccc5e6e278dc
+			sourceLineageTag: a787c771-7740-4002-ae5a-1ae108f9e4f2
+			dataCategory: Uncategorized
 
-		measure Actions = SUM(fact_action_details[actions])
+		measure Actions = EXTERNALMEASURE("Actions", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 03 Action KPIs
-			lineageTag: 50e93e77-ae7f-428d-843e-502066c15905
+			lineageTag: 4a6e2204-cd1e-4fa9-8164-ba46a1eeeb01
+			sourceLineageTag: 50e93e77-ae7f-428d-843e-502066c15905
+			dataCategory: Uncategorized
 
-		measure 'Actions Previous Period' =
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				    IF(
-				        ISBLANK(MaxDate),
-				        BLANK(),
-				        CALCULATE(
-				            [Actions],
-				            DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
-				        )
-				    )
+		measure 'Actions Previous Period' = EXTERNALMEASURE("Actions Previous Period", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 03 Action KPIs
-			lineageTag: 4bc0d135-0cad-40ea-8cc6-f41ac92a3a10
+			lineageTag: 3fb17907-42c2-46a9-adc2-b4a030947477
+			sourceLineageTag: 4bc0d135-0cad-40ea-8cc6-f41ac92a3a10
+			dataCategory: Uncategorized
 
-		measure 'Actions Variance vs Previous' = [Actions] - [Actions Previous Period]
+		measure 'Actions Variance vs Previous' = EXTERNALMEASURE("Actions Variance vs Previous", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 03 Action KPIs
-			lineageTag: 840aa71b-844e-4011-95da-07c8363e8047
+			lineageTag: 7653ab51-49ca-4190-ab98-5db5a1f81ee3
+			sourceLineageTag: 840aa71b-844e-4011-95da-07c8363e8047
+			dataCategory: Uncategorized
 
-		measure 'Actions % Change vs Previous' = DIVIDE([Actions Variance vs Previous], [Actions Previous Period], BLANK())
+		measure 'Actions % Change vs Previous' = EXTERNALMEASURE("Actions % Change vs Previous", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0.00%
 			displayFolder: 03 Action KPIs
-			lineageTag: 0f2886e4-8f6d-4de0-a53f-0ea5a38fb6b2
+			lineageTag: 145e1e57-d773-4743-93df-d3356084d2e2
+			sourceLineageTag: 0f2886e4-8f6d-4de0-a53f-0ea5a38fb6b2
+			dataCategory: Uncategorized
 
-		measure CPA = DIVIDE([Total Cost], [Actions], 0)
+		measure CPA = EXTERNALMEASURE("CPA", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.0
 			displayFolder: 03 Action KPIs
-			lineageTag: a7eb2379-459f-476c-a8db-7c04051a2a1c
+			lineageTag: 53f666ae-4321-431b-8606-8a7290676ee5
+			sourceLineageTag: a7eb2379-459f-476c-a8db-7c04051a2a1c
+			dataCategory: Uncategorized
 
-			annotation PBI_FormatHint = {"isCustom":true}
-
-		measure 'CPA Previous Period' =
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				    IF(
-				        ISBLANK(MaxDate),
-				        BLANK(),
-				        DIVIDE(
-				            CALCULATE(
-				                [Total Cost],
-				                DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
-				            ),
-				            CALCULATE(
-				                [Actions],
-				                DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
-				            ),
-				            BLANK()
-				        )
-				    )
+		measure 'CPA Previous Period' = EXTERNALMEASURE("CPA Previous Period", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.00
 			displayFolder: 03 Action KPIs
-			lineageTag: f381435e-b1b0-495b-9755-8b770844f47d
+			lineageTag: 17ca1840-cf1f-498a-a9bc-c6b3225de7b3
+			sourceLineageTag: f381435e-b1b0-495b-9755-8b770844f47d
+			dataCategory: Uncategorized
 
-		measure 'CPA Variance vs Previous' = [CPA] - [CPA Previous Period]
+		measure 'CPA Variance vs Previous' = EXTERNALMEASURE("CPA Variance vs Previous", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.00
 			displayFolder: 03 Action KPIs
-			lineageTag: 1c0943a4-04cb-42dc-9168-fa5e9f2030c3
+			lineageTag: 5305cb9c-3c8b-479b-944a-05633780eff3
+			sourceLineageTag: 1c0943a4-04cb-42dc-9168-fa5e9f2030c3
+			dataCategory: Uncategorized
 
-		measure 'CPA % Change vs Previous' = DIVIDE([CPA Variance vs Previous], [CPA Previous Period], BLANK())
+		measure 'CPA % Change vs Previous' = EXTERNALMEASURE("CPA % Change vs Previous", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0.00%
 			displayFolder: 03 Action KPIs
-			lineageTag: d556f4c7-da75-4cba-a884-58cb5ccbc2c8
+			lineageTag: 3476bb8f-8e07-4b34-a958-bb172ad9449f
+			sourceLineageTag: d556f4c7-da75-4cba-a884-58cb5ccbc2c8
+			dataCategory: Uncategorized
 
-		measure '# Partners' = ```
-				
-				-- DISTINCTCOUNT(fact_ad_performance[ad_id]) 
-				COUNTROWS(
-				    FILTER(
-				        VALUES(fact_ad_performance[partner_id]),
-				        NOT ISBLANK(fact_ad_performance[partner_id])
-				    )
-				)
-				```
+		measure '# Partners' = EXTERNALMEASURE("# Partners", INTEGER, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 04 Partner KPIs
-			lineageTag: 3d40c5f0-c4b7-4308-bff5-8a1a4a45bdf6
+			lineageTag: 44882451-baec-4069-95b9-2ae7d3338c4d
+			sourceLineageTag: 3d40c5f0-c4b7-4308-bff5-8a1a4a45bdf6
+			dataCategory: Uncategorized
 
-		measure '# Partners Previous Period' =
-				
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				IF(
-				    ISBLANK(MaxDate),
-				    BLANK(),
-				    CALCULATE(
-				        [# Partners],
-				        REMOVEFILTERS(dim_date),
-				        DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
-				    )
-				)
+		measure '# Partners Previous Period' = EXTERNALMEASURE("# Partners Previous Period", INTEGER, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 04 Partner KPIs
-			lineageTag: f174c8ed-33eb-40d1-89ad-06607b0c4258
+			lineageTag: 1abca3d2-0f2e-42af-807c-945501fe7109
+			sourceLineageTag: f174c8ed-33eb-40d1-89ad-06607b0c4258
+			dataCategory: Uncategorized
 
-		measure '# Partners Variance vs Previous' = [# Partners] - [# Partners Previous Period]
+		measure '# Partners Variance vs Previous' = EXTERNALMEASURE("# Partners Variance vs Previous", INTEGER, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 04 Partner KPIs
-			lineageTag: f8f4f231-49ea-4684-9aa9-95e02d2b87ef
+			lineageTag: 953cdf9f-d491-4745-bf24-d65bf74ff129
+			sourceLineageTag: f8f4f231-49ea-4684-9aa9-95e02d2b87ef
+			dataCategory: Uncategorized
 
-		measure '# Partners % Change vs Previous' = DIVIDE([# Partners Variance vs Previous], [# Partners Previous Period], BLANK())
+		measure '# Partners % Change vs Previous' = EXTERNALMEASURE("# Partners % Change vs Previous", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0.00%
 			displayFolder: 04 Partner KPIs
-			lineageTag: 64197762-9feb-4555-9f4f-5aedf71bca5b
+			lineageTag: d06dea1a-fcc6-48b7-8010-6d24558b72ba
+			sourceLineageTag: 64197762-9feb-4555-9f4f-5aedf71bca5b
+			dataCategory: Uncategorized
 
 		/// Daily total cost - use with dim_date[date] for sparklines
-		measure 'Total Cost Daily' = SUM(fact_ad_performance[payable_click_cost_cpc_v2]) + SUM(fact_ad_performance[other_cost]) + SUM(fact_action_details[action_cost])
+		measure 'Total Cost Daily' = EXTERNALMEASURE("Total Cost Daily", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.00
 			displayFolder: 05 Comparison KPIs
-			lineageTag: ad572c54-7eb8-429b-9e87-f7c383251582
+			lineageTag: a97f4e0d-a9dd-40f5-90c2-f52130fdbf93
+			sourceLineageTag: ad572c54-7eb8-429b-9e87-f7c383251582
+			dataCategory: Uncategorized
 
 		/// Daily total clicks - use with dim_date[date] for sparklines
-		measure 'Total Clicks Daily' = SUM(fact_ad_performance[total_clicks])
+		measure 'Total Clicks Daily' = EXTERNALMEASURE("Total Clicks Daily", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0
 			displayFolder: 05 Comparison KPIs
-			lineageTag: aa2b5ce6-7e8e-4c4a-9876-c7d0aa06edf0
+			lineageTag: 2c5646b0-ae1f-4b3f-afc4-d662afa29f0d
+			sourceLineageTag: aa2b5ce6-7e8e-4c4a-9876-c7d0aa06edf0
+			dataCategory: Uncategorized
 
 		/// Daily actions - use with dim_date[date] for sparklines
-		measure 'Actions Daily' = SUM(fact_action_details[actions])
+		measure 'Actions Daily' = EXTERNALMEASURE("Actions Daily", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 05 Comparison KPIs
-			lineageTag: 049f1130-7991-4806-bd8f-491300dd3e2e
+			lineageTag: 9e5ae06e-c8cb-46c4-a253-7d64da80c0c4
+			sourceLineageTag: 049f1130-7991-4806-bd8f-491300dd3e2e
+			dataCategory: Uncategorized
 
 		/// Daily CPA - use with dim_date[date] for sparklines
-		measure 'CPA Daily' = DIVIDE([Total Cost Daily], [Actions Daily], 0)
+		measure 'CPA Daily' = EXTERNALMEASURE("CPA Daily", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.00
 			displayFolder: 05 Comparison KPIs
-			lineageTag: b147812f-116a-47c5-ab89-ed79fd54c908
+			lineageTag: 644e6df0-1257-4333-9cb8-c9cf7229668a
+			sourceLineageTag: b147812f-116a-47c5-ab89-ed79fd54c908
+			dataCategory: Uncategorized
 
 		/// Conversion Rate = Actions / Total Clicks (responds to KPI slicer)
-		measure CVR = DIVIDE([Actions], [Total Clicks], BLANK())
+		measure CVR = EXTERNALMEASURE("CVR", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0.0%
 			displayFolder: 03 Action KPIs
-			lineageTag: 6e3397f5-979d-4c90-9634-81d8c6988c9c
-
-			annotation PBI_FormatHint = {"isCustom":true}
+			lineageTag: b66417f7-1264-4e02-9e1a-699f4b2b5a4a
+			sourceLineageTag: 6e3397f5-979d-4c90-9634-81d8c6988c9c
+			dataCategory: Uncategorized
 
 		/// Previous period Conversion Rate
-		measure 'CVR Previous Period' =
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				    IF(
-				        ISBLANK(MaxDate),
-				        BLANK(),
-				        DIVIDE(
-				            CALCULATE(
-				                [Actions],
-				                DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
-				            ),
-				            CALCULATE(
-				                [Total Clicks],
-				                DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
-				            ),
-				            BLANK()
-				        )
-				    )
+		measure 'CVR Previous Period' = EXTERNALMEASURE("CVR Previous Period", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0.00%
 			displayFolder: 03 Action KPIs
-			lineageTag: d454f28e-ba0f-4ca2-a9a3-d6cb3cfcf551
+			lineageTag: 1590bd70-2895-49ca-a740-76b6b0bb19b3
+			sourceLineageTag: d454f28e-ba0f-4ca2-a9a3-d6cb3cfcf551
+			dataCategory: Uncategorized
 
 		/// CVR change from previous period
-		measure 'CVR Variance vs Previous' = [CVR] - [CVR Previous Period]
+		measure 'CVR Variance vs Previous' = EXTERNALMEASURE("CVR Variance vs Previous", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0.00%
 			displayFolder: 03 Action KPIs
-			lineageTag: afb57102-9718-4373-930a-9d96fb190149
+			lineageTag: 34ab5605-131c-482b-83ac-55e7866e52b3
+			sourceLineageTag: afb57102-9718-4373-930a-9d96fb190149
+			dataCategory: Uncategorized
 
 		/// CVR percent change from previous period
-		measure 'CVR % Change vs Previous' = DIVIDE([CVR Variance vs Previous], [CVR Previous Period], BLANK())
+		measure 'CVR % Change vs Previous' = EXTERNALMEASURE("CVR % Change vs Previous", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0.00%
 			displayFolder: 03 Action KPIs
-			lineageTag: faa26d13-c997-4836-909d-3c45f6bbd97c
+			lineageTag: 5dc2a250-7c4f-4fb3-971c-da6d5dff6138
+			sourceLineageTag: faa26d13-c997-4836-909d-3c45f6bbd97c
+			dataCategory: Uncategorized
 
 		/// Selected Action Total = Total actions for the KPI selected in the KPI slicer (dimension: dim_event_type_kpi[kpi_name])
-		measure 'Selected Action Total' = [Actions]
+		measure 'Selected Action Total' = EXTERNALMEASURE("Selected Action Total", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 03 Action KPIs
-			lineageTag: d09c593d-d898-4c14-81ba-7563b1352858
+			lineageTag: 2ae97c80-65fe-4673-b75c-78028fc5fcc4
+			sourceLineageTag: d09c593d-d898-4c14-81ba-7563b1352858
+			dataCategory: Uncategorized
 
 		/// Previous period Selected Action Total
-		measure 'Selected Action Total Previous Period' = [Actions Previous Period]
+		measure 'Selected Action Total Previous Period' = EXTERNALMEASURE("Selected Action Total Previous Period", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 03 Action KPIs
-			lineageTag: 472ffbb3-d352-4161-aa44-02acf616c302
+			lineageTag: 27ba3a47-0f58-4f34-a6bd-003e30894053
+			sourceLineageTag: 472ffbb3-d352-4161-aa44-02acf616c302
+			dataCategory: Uncategorized
 
 		/// Selected Action Total change from previous period
-		measure 'Selected Action Total Variance vs Previous' = [Actions Variance vs Previous]
+		measure 'Selected Action Total Variance vs Previous' = EXTERNALMEASURE("Selected Action Total Variance vs Previous", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 03 Action KPIs
-			lineageTag: 623dc952-1ff3-4887-bd6f-fbfa077c436c
+			lineageTag: be3f02d4-6b28-49fe-93fa-e65dba1185c7
+			sourceLineageTag: 623dc952-1ff3-4887-bd6f-fbfa077c436c
+			dataCategory: Uncategorized
 
 		/// Selected Action Total percent change from previous period
-		measure 'Selected Action Total % Change vs Previous' = [Actions % Change vs Previous]
+		measure 'Selected Action Total % Change vs Previous' = EXTERNALMEASURE("Selected Action Total % Change vs Previous", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0.00%
 			displayFolder: 03 Action KPIs
-			lineageTag: 62b1fbe3-d7e3-40bd-bf40-1f20868595b0
+			lineageTag: d96ddd39-3f5e-4fdf-9c1f-2318fbda3563
+			sourceLineageTag: 62b1fbe3-d7e3-40bd-bf40-1f20868595b0
+			dataCategory: Uncategorized
 
 		/// Conditional color for Total Cost card (Green if lower or equal, Red if higher)
-		measure 'Total Cost Color' =
-				VAR _cur = [Total Cost]
-				VAR _prev = [Total Cost Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
+		measure 'Total Cost Color' = EXTERNALMEASURE("Total Cost Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 06 Formatting Colors
-			lineageTag: 4c359db4-57d9-4237-b631-9019e227f7b4
+			lineageTag: 5fc7c5f3-bf04-4bc2-af32-ac16910a4a36
+			sourceLineageTag: 4c359db4-57d9-4237-b631-9019e227f7b4
+			dataCategory: Uncategorized
 
-		measure 'Action Cost Color' =
-				VAR _cur = [Action Cost]
-				VAR _prev = [Action Cost Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
+		measure 'Action Cost Color' = EXTERNALMEASURE("Action Cost Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 06 Formatting Colors
-			lineageTag: 54a8a6af-dc95-4dd3-b7e7-6eff655a6d3e
+			lineageTag: 2abaa495-3234-430e-8cc9-5efee8ea6ce0
+			sourceLineageTag: 54a8a6af-dc95-4dd3-b7e7-6eff655a6d3e
+			dataCategory: Uncategorized
 
-		measure 'Other Cost Color' =
-				VAR _cur = [Other Cost]
-				VAR _prev = [Other Cost Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
+		measure 'Other Cost Color' = EXTERNALMEASURE("Other Cost Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 06 Formatting Colors
-			lineageTag: 0565b766-d90f-4d83-9c9c-4503c9daa950
+			lineageTag: d71b1f8d-054b-415e-b4be-3cdde6f17cc9
+			sourceLineageTag: 0565b766-d90f-4d83-9c9c-4503c9daa950
+			dataCategory: Uncategorized
 
-		measure 'Payable Click Cost Color' =
-				VAR _cur = [Payable Click Cost]
-				VAR _prev = [Payable Click Cost Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
+		measure 'Payable Click Cost Color' = EXTERNALMEASURE("Payable Click Cost Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 06 Formatting Colors
-			lineageTag: 959341a2-7e7a-45fb-9acb-598468a2b9a6
+			lineageTag: bd3796fa-acd0-4c0d-b82f-d346fa7d0378
+			sourceLineageTag: 959341a2-7e7a-45fb-9acb-598468a2b9a6
+			dataCategory: Uncategorized
 
-		measure 'Total Clicks Color' =
-				VAR _cur = [Total Clicks]
-				VAR _prev = [Total Clicks Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
+		measure 'Total Clicks Color' = EXTERNALMEASURE("Total Clicks Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 06 Formatting Colors
-			lineageTag: f02d0580-6820-4b37-b196-80d3b65a62ab
+			lineageTag: 3ade1646-9328-4d23-98f6-14a3884e3a68
+			sourceLineageTag: f02d0580-6820-4b37-b196-80d3b65a62ab
+			dataCategory: Uncategorized
 
-		measure 'Payable Clicks v2 Color' =
-				VAR _cur = [Payable Clicks v2]
-				VAR _prev = [Payable Clicks v2 Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
+		measure 'Payable Clicks v2 Color' = EXTERNALMEASURE("Payable Clicks v2 Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 06 Formatting Colors
-			lineageTag: 18065b4d-d341-4a9c-ae25-9ebce28d24da
+			lineageTag: 89aefa2c-10fa-43f0-9c8f-9fa5422fa785
+			sourceLineageTag: 18065b4d-d341-4a9c-ae25-9ebce28d24da
+			dataCategory: Uncategorized
 
-		measure 'Actions Color' =
-				VAR _cur = [Actions]
-				VAR _prev = [Actions Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
+		measure 'Actions Color' = EXTERNALMEASURE("Actions Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 06 Formatting Colors
-			lineageTag: 1ac37526-3de7-45c4-ae2c-9ce141a447b0
+			lineageTag: 05866b6c-834a-4676-bdb9-1fd704b73269
+			sourceLineageTag: 1ac37526-3de7-45c4-ae2c-9ce141a447b0
+			dataCategory: Uncategorized
 
-		measure 'CPA Color' =
-				VAR _cur = [CPA]
-				VAR _prev = [CPA Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#D13438",
-				        _cur < _prev, "#00A651",
-				        "#808080"
-				    )
+		measure 'CPA Color' = EXTERNALMEASURE("CPA Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 06 Formatting Colors
-			lineageTag: 9a846e8b-12f6-42fb-8bfc-14e4f7fa62aa
+			lineageTag: 45452950-93e5-4e94-b65f-4c4a04e57cb3
+			sourceLineageTag: 9a846e8b-12f6-42fb-8bfc-14e4f7fa62aa
+			dataCategory: Uncategorized
 
-		measure 'Partners Color' =
-				VAR _cur = [# Partners]
-				VAR _prev = [# Partners Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
+		measure 'Partners Color' = EXTERNALMEASURE("Partners Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 06 Formatting Colors
-			lineageTag: fe1b2204-0aaa-4946-8f57-50d4814f2aac
+			lineageTag: dfcb9fd8-9c4e-45b7-a1c6-62c743669e22
+			sourceLineageTag: fe1b2204-0aaa-4946-8f57-50d4814f2aac
+			dataCategory: Uncategorized
 
-		measure 'CVR Color' =
-				VAR _cur = [CVR]
-				VAR _prev = [CVR Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
+		measure 'CVR Color' = EXTERNALMEASURE("CVR Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 06 Formatting Colors
-			lineageTag: 9e42031b-d563-4e45-8ec9-6d8d37a8c936
+			lineageTag: bd435e46-c6e6-489c-8cac-d2cf52220861
+			sourceLineageTag: 9e42031b-d563-4e45-8ec9-6d8d37a8c936
+			dataCategory: Uncategorized
 
-		measure 'Refresh Timestamp' = "Data refreshed at: " & FORMAT(NOW(), "MMM DD YYYY HH:MM")
+		measure 'Refresh Timestamp' = EXTERNALMEASURE("Refresh Timestamp", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 Metadata
-			lineageTag: 6e71848f-1524-49bd-8802-e55dd8ebdedc
+			lineageTag: 740a5bbc-b5e1-440e-936e-2d6ff8ca9854
+			sourceLineageTag: 6e71848f-1524-49bd-8802-e55dd8ebdedc
+			dataCategory: Uncategorized
 
 		/// Action 1 count (independent selector)
-		measure 'Action 1' =
-				VAR _sel = SELECTEDVALUE('Action 1 Selector'[kpi_name])
-				RETURN
-				IF(
-				    ISBLANK(_sel),
-				    CALCULATE([Actions], REMOVEFILTERS(dim_event_type_kpi)),
-				    CALCULATE(
-				        [Actions],
-				        REMOVEFILTERS(dim_event_type_kpi),
-				        KEEPFILTERS(dim_event_type_kpi[kpi_name] = _sel)
-				    )
-				)
+		measure 'Action 1' = EXTERNALMEASURE("Action 1", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 08 Multi-Action Analysis
-			lineageTag: 473ac631-f23c-4917-b6db-f8aa6117887c
+			lineageTag: 9f8a8499-fe65-4e30-a02b-af65b997b9e2
+			sourceLineageTag: 473ac631-f23c-4917-b6db-f8aa6117887c
+			dataCategory: Uncategorized
 
 		/// Action 1 CVR = Action 1 / Total Clicks
-		measure 'Action 1 CVR' = DIVIDE([Action 1], [Total Clicks], BLANK())
+		measure 'Action 1 CVR' = EXTERNALMEASURE("Action 1 CVR", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0.00%
 			displayFolder: 08 Multi-Action Analysis
-			lineageTag: 449c1529-671b-41ce-847c-1df26b2dc2db
+			lineageTag: 5322f875-042c-4404-8f7c-e4c7f1f51094
+			sourceLineageTag: 449c1529-671b-41ce-847c-1df26b2dc2db
+			dataCategory: Uncategorized
 
 		/// Action 1 CPL = Total Cost / Action 1
-		measure 'Action 1 CPL' = DIVIDE([Total Cost], [Action 1], BLANK())
+		measure 'Action 1 CPL' = EXTERNALMEASURE("Action 1 CPL", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.00
 			displayFolder: 08 Multi-Action Analysis
-			lineageTag: aa8e94f0-e4a5-4df1-a37b-a3e6dee910d4
+			lineageTag: 11f9b08d-81d7-488a-9fcc-cb773c2dd00c
+			sourceLineageTag: aa8e94f0-e4a5-4df1-a37b-a3e6dee910d4
+			dataCategory: Uncategorized
 
 		/// Action 2 count (independent selector)
-		measure 'Action 2' =
-				VAR _sel = SELECTEDVALUE('Action 2 Selector'[kpi_name])
-				RETURN
-				IF(
-				    ISBLANK(_sel),
-				    CALCULATE([Actions], REMOVEFILTERS(dim_event_type_kpi)),
-				    CALCULATE(
-				        [Actions],
-				        REMOVEFILTERS(dim_event_type_kpi),
-				        KEEPFILTERS(dim_event_type_kpi[kpi_name] = _sel)
-				    )
-				)
+		measure 'Action 2' = EXTERNALMEASURE("Action 2", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 08 Multi-Action Analysis
-			lineageTag: 761b0e4c-8db3-4db2-ae26-6168bc6b2c37
+			lineageTag: e33bb19c-8144-4e5c-8bb9-57161f02ba7a
+			sourceLineageTag: 761b0e4c-8db3-4db2-ae26-6168bc6b2c37
+			dataCategory: Uncategorized
 
 		/// Action 2 CVR = Action 2 / Total Clicks
-		measure 'Action 2 CVR' = DIVIDE([Action 2], [Total Clicks], BLANK())
+		measure 'Action 2 CVR' = EXTERNALMEASURE("Action 2 CVR", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0.00%
 			displayFolder: 08 Multi-Action Analysis
-			lineageTag: fbb2a04a-fbd9-41e1-b027-752c4696dbc7
+			lineageTag: 8984f675-af15-460b-ae38-a990b0fdc406
+			sourceLineageTag: fbb2a04a-fbd9-41e1-b027-752c4696dbc7
+			dataCategory: Uncategorized
 
 		/// Action 2 CPL = Total Cost / Action 2
-		measure 'Action 2 CPL' = DIVIDE([Total Cost], [Action 2], BLANK())
+		measure 'Action 2 CPL' = EXTERNALMEASURE("Action 2 CPL", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.00
 			displayFolder: 08 Multi-Action Analysis
-			lineageTag: 831c9bc0-1885-4b87-af48-59e108624e38
+			lineageTag: 3c3221f6-57b4-43c0-89f9-709e7d8f5ad8
+			sourceLineageTag: 831c9bc0-1885-4b87-af48-59e108624e38
+			dataCategory: Uncategorized
 
 		/// Action 3 count (independent selector)
-		measure 'Action 3' =
-				VAR _sel = SELECTEDVALUE('Action 3 Selector'[kpi_name])
-				RETURN
-				IF(
-				    ISBLANK(_sel),
-				    CALCULATE([Actions], REMOVEFILTERS(dim_event_type_kpi)),
-				    CALCULATE(
-				        [Actions],
-				        REMOVEFILTERS(dim_event_type_kpi),
-				        KEEPFILTERS(dim_event_type_kpi[kpi_name] = _sel)
-				    )
-				)
+		measure 'Action 3' = EXTERNALMEASURE("Action 3", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 08 Multi-Action Analysis
-			lineageTag: 12db783f-c22f-4a67-8a46-04127b746474
+			lineageTag: 24275668-cb7c-4785-b21c-9f94cc29f1e7
+			sourceLineageTag: 12db783f-c22f-4a67-8a46-04127b746474
+			dataCategory: Uncategorized
 
 		/// Action 3 CVR = Action 3 / Total Clicks
-		measure 'Action 3 CVR' = DIVIDE([Action 3], [Total Clicks], BLANK())
+		measure 'Action 3 CVR' = EXTERNALMEASURE("Action 3 CVR", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0.00%
 			displayFolder: 08 Multi-Action Analysis
-			lineageTag: c6279ed7-af5f-4afa-b2d7-461f0810c5f5
+			lineageTag: 96a05b5e-836e-43f7-b2df-2af4f08efc0c
+			sourceLineageTag: c6279ed7-af5f-4afa-b2d7-461f0810c5f5
+			dataCategory: Uncategorized
 
 		/// Action 3 CPL = Total Cost / Action 3
-		measure 'Action 3 CPL' = DIVIDE([Total Cost], [Action 3], BLANK())
+		measure 'Action 3 CPL' = EXTERNALMEASURE("Action 3 CPL", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.00
 			displayFolder: 08 Multi-Action Analysis
-			lineageTag: df3dc4b5-dceb-439b-94ad-983420d98c32
+			lineageTag: 019ea7ad-1653-4587-a5a3-9aba1968643c
+			sourceLineageTag: df3dc4b5-dceb-439b-94ad-983420d98c32
+			dataCategory: Uncategorized
 
-		measure 'Total Cost Variance Label' =
-				
-				
-				VAR Prev = [Total Cost Previous Period]
-				VAR Pct = [Total Cost % Change vs Previous]
-				RETURN
-				IF(
-				    ISBLANK(Prev),
-				    "Previous: N/A",
-				    "Previous: "
-				        & FORMAT(COALESCE(Prev,0), "$#,##0.0")
-				        & " ("
-				        & FORMAT(COALESCE(Pct,0), "▲0.0%;▼0.0%;0.0%")
-				        & ")"
-				)
+		measure 'Total Cost Variance Label' = EXTERNALMEASURE("Total Cost Variance Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 01 Cost KPIs
-			lineageTag: 4021fff4-6684-4f78-8b30-e945853bdede
+			lineageTag: e38d9332-81f2-48bd-a519-0d1269adb8b7
+			sourceLineageTag: 4021fff4-6684-4f78-8b30-e945853bdede
+			dataCategory: Uncategorized
 
-		measure 'Total Cost Change Label' =
-				VAR _cur = [Total Cost]
-				VAR _prev = [Total Cost Previous Period]
-				VAR _pct = DIVIDE(_cur - _prev, _prev)
-				RETURN
-				IF(
-				    ISBLANK(_pct),
-				    "—",
-				    IF(
-				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				        IF(
-				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				            "0.0%"
-				        )
-				    )
-				)
+		measure 'Total Cost Change Label' = EXTERNALMEASURE("Total Cost Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 01 Cost KPIs
-			lineageTag: 3c5f912c-908d-484b-a15a-0cdef805b78e
+			lineageTag: 21d0141c-f79e-43c2-b30d-d7c54c5549bc
+			sourceLineageTag: 3c5f912c-908d-484b-a15a-0cdef805b78e
+			dataCategory: Uncategorized
 
-		measure 'Total Cost Previous Label' =
-				
-				VAR _prev = COALESCE([Total Cost Previous Period], 0)
-				RETURN
-				"vs previous: " &
-				switch(true(), abs(_prev)>= 1000000,FORMAT(_prev / 1000000, "$#,##0.0M"), ABS(_prev) >= 1000, FOrMAT(_prev/1000, "$#,##0K"),FORMAT(_prev,"$#,##0"))
+		measure 'Total Cost Previous Label' = EXTERNALMEASURE("Total Cost Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 01 Cost KPIs
-			lineageTag: ad950e7a-2679-4912-a691-8ec65e524670
+			lineageTag: a63500e6-ad29-4a94-bd4c-51ed0bbf730e
+			sourceLineageTag: ad950e7a-2679-4912-a691-8ec65e524670
+			dataCategory: Uncategorized
 
-		measure 'Actions Change Label' =
-				VAR _cur = [Actions]
-				VAR _prev = [Actions Previous Period]
-				VAR _pct = DIVIDE(_cur - _prev, _prev)
-				RETURN
-				IF(
-				    ISBLANK(_pct),
-				    "—",
-				    IF(
-				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				        IF(
-				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				            "0.0%"
-				        )
-				    )
-				)
+		measure 'Actions Change Label' = EXTERNALMEASURE("Actions Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 7894efa8-fdb7-41eb-80d5-6db9a0fc2eeb
+			lineageTag: 0cf5d74d-e859-40ce-bcb4-45d18b8417d8
+			sourceLineageTag: 7894efa8-fdb7-41eb-80d5-6db9a0fc2eeb
+			dataCategory: Uncategorized
 
-		measure 'Actions Previous Label' =
-				VAR _prev = [Actions Previous Period]
-				RETURN
-				    "vs previous: " &
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "N/A",
-				        ABS(_prev) >= 1000000, FORMAT(_prev / 1000000, "#,##0.0M"),
-				        ABS(_prev) >= 1000, FORMAT(_prev / 1000, "#,##0.0K"),
-				        FORMAT(_prev, "#,##0")
-				    )
+		measure 'Actions Previous Label' = EXTERNALMEASURE("Actions Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 24e3b395-6abf-4b12-922a-d7a5669c971c
+			lineageTag: 503d037f-9a87-4afb-83fc-5ff2eb028f97
+			sourceLineageTag: 24e3b395-6abf-4b12-922a-d7a5669c971c
+			dataCategory: Uncategorized
 
-		measure 'Actions Label Color' =
-				VAR _cur = [Actions]
-				VAR _prev = [Actions Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
+		measure 'Actions Label Color' = EXTERNALMEASURE("Actions Label Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 99c4d651-8e64-41ee-8c1b-578a4146a999
+			lineageTag: cb48d2b0-4295-4d8f-aae0-980a8b9427e1
+			sourceLineageTag: 99c4d651-8e64-41ee-8c1b-578a4146a999
+			dataCategory: Uncategorized
 
-		measure 'CPA Change Label' =
-				VAR _cur = [CPA]
-				VAR _prev = [CPA Previous Period]
-				VAR _pct = DIVIDE(_cur - _prev, _prev)
-				RETURN
-				IF(
-				    ISBLANK(_pct),
-				    "—",
-				    IF(
-				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				        IF(
-				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				            "0.0%"
-				        )
-				    )
-				)
+		measure 'CPA Change Label' = EXTERNALMEASURE("CPA Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: d3b1494b-cce5-4192-bb10-77c4e97c2ff4
+			lineageTag: ed1afce8-48b6-4a1a-9b4f-ecc83e2370c4
+			sourceLineageTag: d3b1494b-cce5-4192-bb10-77c4e97c2ff4
+			dataCategory: Uncategorized
 
-		measure 'CPA Previous Label' = "vs previous: $" & FORMAT(COALESCE([CPA Previous Period],0), "#,##0.0")
+		measure 'CPA Previous Label' = EXTERNALMEASURE("CPA Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 515c4465-e0b3-463a-9c59-05e95553da5a
+			lineageTag: 1f6f0897-6bff-496c-bd90-e86b06298bab
+			sourceLineageTag: 515c4465-e0b3-463a-9c59-05e95553da5a
+			dataCategory: Uncategorized
 
-		measure 'CPA Label Color' =
-				VAR _cur = [CPA]
-				VAR _prev = [CPA Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#D13438",
-				        _cur < _prev, "#00A651",
-				        "#808080"
-				    )
+		measure 'CPA Label Color' = EXTERNALMEASURE("CPA Label Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 004b0849-2a87-43ad-af79-ff20182604de
+			lineageTag: 103797a1-5292-417f-9e36-64a85776f755
+			sourceLineageTag: 004b0849-2a87-43ad-af79-ff20182604de
+			dataCategory: Uncategorized
 
-		measure 'Total Clicks Change Label' =
-				VAR _cur = [Total Clicks]
-				VAR _prev = [Total Clicks Previous Period]
-				VAR _pct = DIVIDE(_cur - _prev, _prev)
-				RETURN
-				IF(
-				    ISBLANK(_pct),
-				    "—",
-				    IF(
-				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				        IF(
-				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				            "0.0%"
-				        )
-				    )
-				)
+		measure 'Total Clicks Change Label' = EXTERNALMEASURE("Total Clicks Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 9d73ba06-70c0-4b11-8cb5-31ebbe8c83c7
+			lineageTag: 136917fa-8632-43ef-bd01-2bafaf3be0da
+			sourceLineageTag: 9d73ba06-70c0-4b11-8cb5-31ebbe8c83c7
+			dataCategory: Uncategorized
 
-		measure 'Total Clicks Previous Label' =
-				VAR _prev = [Total Clicks Previous Period]
-				RETURN
-				    "vs previous: " &
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "N/A",
-				        ABS(_prev) >= 1000000, FORMAT(_prev / 1000000, "#,##0.0M"),
-				        ABS(_prev) >= 1000, FORMAT(_prev / 1000, "#,##0.0K"),
-				        FORMAT(_prev, "#,##0")
-				    )
+		measure 'Total Clicks Previous Label' = EXTERNALMEASURE("Total Clicks Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: aef2f923-84b1-454a-bf50-e3c2bf25869e
+			lineageTag: 6bb1a983-4db2-49bf-a9b6-7be7b521a297
+			sourceLineageTag: aef2f923-84b1-454a-bf50-e3c2bf25869e
+			dataCategory: Uncategorized
 
-		measure 'Total Clicks Label Color' =
-				VAR _cur = [Total Clicks]
-				VAR _prev = [Total Clicks Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
+		measure 'Total Clicks Label Color' = EXTERNALMEASURE("Total Clicks Label Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: dc05d13e-f84c-42ad-b35f-4e8e5312b9d9
+			lineageTag: e4e02942-1c96-45b5-a2f0-8cb7e021d92b
+			sourceLineageTag: dc05d13e-f84c-42ad-b35f-4e8e5312b9d9
+			dataCategory: Uncategorized
 
-		measure 'CVR Change Label' =
-				VAR _cur = [CVR]
-				VAR _prev = [CVR Previous Period]
-				VAR _pp = ABS(_cur - _prev) * 100
-				RETURN
-				IF(
-				    ISBLANK(_prev),
-				    "—",
-				    IF(_cur >= _prev, "▴ ", "▾ ") & FORMAT(_pp, "0.0") & "%"
-				)
+		measure 'CVR Change Label' = EXTERNALMEASURE("CVR Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 158c6f0d-124e-4a07-8855-3ac4b7955c47
+			lineageTag: 2e208029-cec0-44be-8c30-6636b927c9e5
+			sourceLineageTag: 158c6f0d-124e-4a07-8855-3ac4b7955c47
+			dataCategory: Uncategorized
 
-		measure 'CVR Previous Label' = "vs previous: " & FORMAT(COALESCE([CVR Previous Period],0), "0.00%")
+		measure 'CVR Previous Label' = EXTERNALMEASURE("CVR Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: e08dfaf0-98ed-4a88-8fa4-a2405228fb97
+			lineageTag: e8f991b6-d682-4899-8583-c0730ee5cffb
+			sourceLineageTag: e08dfaf0-98ed-4a88-8fa4-a2405228fb97
+			dataCategory: Uncategorized
 
-		measure 'CVR Label Color' =
-				VAR _cur = [CVR]
-				VAR _prev = [CVR Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
+		measure 'CVR Label Color' = EXTERNALMEASURE("CVR Label Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 493a721b-78aa-4c7a-bc55-d034fb4194dd
+			lineageTag: 69494ef3-332e-4ce6-9204-07dffaab4649
+			sourceLineageTag: 493a721b-78aa-4c7a-bc55-d034fb4194dd
+			dataCategory: Uncategorized
 
-		measure 'Action Cost Change Label' =
-				VAR _cur = [Action Cost]
-				VAR _prev = [Action Cost Previous Period]
-				VAR _pct = DIVIDE(_cur - _prev, _prev)
-				RETURN
-				IF(
-				    ISBLANK(_pct),
-				    "—",
-				    IF(
-				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				        IF(
-				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				            "0.0%"
-				        )
-				    )
-				)
+		measure 'Action Cost Change Label' = EXTERNALMEASURE("Action Cost Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: a06411ef-28a2-4eac-8ba5-58053d2c2b71
+			lineageTag: c7889ec3-8ec7-4a81-906c-d8f8e6f948d7
+			sourceLineageTag: a06411ef-28a2-4eac-8ba5-58053d2c2b71
+			dataCategory: Uncategorized
 
-		measure 'Action Cost Previous Label' =
-				VAR _prev = [Action Cost Previous Period]
-				RETURN
-				"vs previous: " &
-				switch(true(), abs(_prev)>= 1000000,FORMAT(_prev / 1000000, "$#,##0.0M"), ABS(_prev) >= 1000, FOrMAT(_prev/1000, "$#,##0K"),FORMAT(_prev,"$#,##0"))
+		measure 'Action Cost Previous Label' = EXTERNALMEASURE("Action Cost Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: b1951681-3101-4ca8-890a-af8b179da4d8
+			lineageTag: b72cb50d-2d38-4e37-9a1b-61e5e6b6c62d
+			sourceLineageTag: b1951681-3101-4ca8-890a-af8b179da4d8
+			dataCategory: Uncategorized
 
-		measure 'Action Cost Label Color' =
-				VAR _cur = [Action Cost]
-				VAR _prev = [Action Cost Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
+		measure 'Action Cost Label Color' = EXTERNALMEASURE("Action Cost Label Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: e9c65fe2-ddb2-445b-ab1b-9f44248b5f69
+			lineageTag: 58970435-09cd-4ba8-8c4f-03bc46eb5211
+			sourceLineageTag: e9c65fe2-ddb2-445b-ab1b-9f44248b5f69
+			dataCategory: Uncategorized
 
-		measure 'Other Cost Change Label' =
-				VAR _cur = [Other Cost]
-				VAR _prev = [Other Cost Previous Period]
-				VAR _pct = DIVIDE(_cur - _prev, _prev)
-				RETURN
-				IF(
-				    ISBLANK(_pct),
-				    "—",
-				    IF(
-				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				        IF(
-				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				            "0.0%"
-				        )
-				    )
-				)
+		measure 'Other Cost Change Label' = EXTERNALMEASURE("Other Cost Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 4558ca57-22e8-4ae7-957d-f94d50e09bfe
+			lineageTag: 312f5fdf-e389-4b0e-b23f-5810157fee7d
+			sourceLineageTag: 4558ca57-22e8-4ae7-957d-f94d50e09bfe
+			dataCategory: Uncategorized
 
-		measure 'Other Cost Previous Label' =
-				VAR _prev = [Other Cost Previous Period]
-				RETURN
-				"vs previous: " &
-				switch(true(), abs(_prev)>= 1000000,FORMAT(_prev / 1000000, "$#,##0.0M"), ABS(_prev) >= 1000, FOrMAT(_prev/1000, "$#,##0K"),FORMAT(_prev,"$#,##0"))
+		measure 'Other Cost Previous Label' = EXTERNALMEASURE("Other Cost Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 1a814cfb-4247-4be7-8aa4-6e2aeeae65c5
+			lineageTag: b77aabfd-c297-4175-9aab-ed83724f2a56
+			sourceLineageTag: 1a814cfb-4247-4be7-8aa4-6e2aeeae65c5
+			dataCategory: Uncategorized
 
-		measure 'Other Cost Label Color' =
-				VAR _cur = [Other Cost]
-				VAR _prev = [Other Cost Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
+		measure 'Other Cost Label Color' = EXTERNALMEASURE("Other Cost Label Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 49f6506b-a14f-4f7f-8de6-8e45cafaacb4
+			lineageTag: c52ca017-5a90-4d84-908d-55a9ea1256d1
+			sourceLineageTag: 49f6506b-a14f-4f7f-8de6-8e45cafaacb4
+			dataCategory: Uncategorized
 
-		measure 'Payable Click Cost Change Label' =
-				VAR _cur = [Payable Click Cost]
-				VAR _prev = [Payable Click Cost Previous Period]
-				VAR _pct = DIVIDE(_cur - _prev, _prev)
-				RETURN
-				IF(
-				    ISBLANK(_pct),
-				    "—",
-				    IF(
-				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				        IF(
-				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				            "0.0%"
-				        )
-				    )
-				)
+		measure 'Payable Click Cost Change Label' = EXTERNALMEASURE("Payable Click Cost Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 42e16399-9576-4b65-8147-eaee44624dca
+			lineageTag: 3b8d70f7-f7d7-4ad5-9b0e-bec03e33712d
+			sourceLineageTag: 42e16399-9576-4b65-8147-eaee44624dca
+			dataCategory: Uncategorized
 
-		measure 'Payable Click Cost Previous Label' =
-				VAR _prev = [Payable Click Cost Previous Period]
-				RETURN
-				"vs previous: " &
-				switch(true(), abs(_prev)>= 1000000,FORMAT(_prev / 1000000, "$#,##0.0M"), ABS(_prev) >= 1000, FOrMAT(_prev/1000, "$#,##0K"),FORMAT(_prev,"$#,##0"))
+		measure 'Payable Click Cost Previous Label' = EXTERNALMEASURE("Payable Click Cost Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 089f229f-96b8-4c58-9351-3ee6e49aa371
+			lineageTag: 221816bc-d583-46b7-a3b6-fb6817d44f62
+			sourceLineageTag: 089f229f-96b8-4c58-9351-3ee6e49aa371
+			dataCategory: Uncategorized
 
-		measure 'Payable Click Cost Label Color' =
-				VAR _cur = [Payable Click Cost]
-				VAR _prev = [Payable Click Cost Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
+		measure 'Payable Click Cost Label Color' = EXTERNALMEASURE("Payable Click Cost Label Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 8fdf78bb-d8b7-445c-8cd3-45e6aa6cc568
+			lineageTag: 04059705-85ac-47a9-ad5c-167206ec3d09
+			sourceLineageTag: 8fdf78bb-d8b7-445c-8cd3-45e6aa6cc568
+			dataCategory: Uncategorized
 
-		measure 'Payable Clicks Change Label' =
-				VAR _cur = [Payable Clicks v2]
-				VAR _prev = [Payable Clicks v2 Previous Period]
-				VAR _pct = DIVIDE(_cur - _prev, _prev)
-				RETURN
-				IF(
-				    ISBLANK(_pct),
-				    "—",
-				    IF(
-				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				        IF(
-				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				            "0.0%"
-				        )
-				    )
-				)
+		measure 'Payable Clicks Change Label' = EXTERNALMEASURE("Payable Clicks Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 2715c978-dfb9-4042-a7ad-a652a01195f6
+			lineageTag: c8942bde-d6fb-4eda-a381-5dc1818c7224
+			sourceLineageTag: 2715c978-dfb9-4042-a7ad-a652a01195f6
+			dataCategory: Uncategorized
 
-		measure 'Payable Clicks Previous Label' =
-				
-				VAR _prev = [Payable Clicks v2 Previous Period]
-				RETURN
-				"vs previous: " &
-				switch(true(), abs(_prev)>= 1000000,FORMAT(_prev / 1000000, "$#,##0.0M"), ABS(_prev) >= 1000, FOrMAT(_prev/1000, "$#,##0K"),FORMAT(_prev,"$#,##0"))
+		measure 'Payable Clicks Previous Label' = EXTERNALMEASURE("Payable Clicks Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 8c16e51b-adc6-416a-9062-f25d1d1653d5
+			lineageTag: 86e61352-6d4d-4f55-bec7-99ad378c10b6
+			sourceLineageTag: 8c16e51b-adc6-416a-9062-f25d1d1653d5
+			dataCategory: Uncategorized
 
-		measure 'Payable Clicks Label Color' =
-				VAR _cur = [Payable Clicks v2]
-				VAR _prev = [Payable Clicks v2 Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
+		measure 'Payable Clicks Label Color' = EXTERNALMEASURE("Payable Clicks Label Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 2d5e0127-7239-45fd-ba2b-064d893e6a2d
+			lineageTag: 2e14baee-fc93-408b-931a-ce723e5db361
+			sourceLineageTag: 2d5e0127-7239-45fd-ba2b-064d893e6a2d
+			dataCategory: Uncategorized
 
-		measure 'Partners Change Label' =
-				VAR _cur = [# Partners]
-				VAR _prev = [# Partners Previous Period]
-				VAR _pct = DIVIDE(_cur - _prev, _prev)
-				RETURN
-				IF(
-				    ISBLANK(_pct),
-				    "—",
-				    IF(
-				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				        IF(
-				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				            "0.0%"
-				        )
-				    )
-				)
+		measure 'Partners Change Label' = EXTERNALMEASURE("Partners Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: e2d1874e-ad98-4ab8-b13a-e15d84ed3a8b
+			lineageTag: 94f93de3-e847-470f-90c9-6242a9bcd780
+			sourceLineageTag: e2d1874e-ad98-4ab8-b13a-e15d84ed3a8b
+			dataCategory: Uncategorized
 
-		measure 'Partners Previous Label' = "vs previous: " & FORMAT(COALESCE([# Partners Previous Period], 0), "#,##0")
+		measure 'Partners Previous Label' = EXTERNALMEASURE("Partners Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: aa19833a-7c68-4e9c-91cd-3fd5f9d97fff
+			lineageTag: 32aafcfc-baf2-4343-9828-605a98342fea
+			sourceLineageTag: aa19833a-7c68-4e9c-91cd-3fd5f9d97fff
+			dataCategory: Uncategorized
 
-		measure 'Partners Label Color' =
-				VAR _cur = [# Partners]
-				VAR _prev = [# Partners Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
+		measure 'Partners Label Color' = EXTERNALMEASURE("Partners Label Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: c4148de3-ed08-4b11-9e9d-5f451e408f1c
+			lineageTag: 5bf23f5a-5417-42ee-b729-f6c2a05e0a60
+			sourceLineageTag: c4148de3-ed08-4b11-9e9d-5f451e408f1c
+			dataCategory: Uncategorized
 
-		measure 'PSPV+ Actions' = CALCULATE([Actions], REMOVEFILTERS(dim_event_type_kpi), dim_event_type_kpi[kpi_name] = "PSPV+")
+		measure 'PSPV+ Actions' = EXTERNALMEASURE("PSPV+ Actions", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 08 LOB Action Totals
-			lineageTag: b129e023-f6f7-4d63-9326-43a1322b52dc
+			lineageTag: c329b8ec-3e32-48b2-9f9d-5c347f5b0143
+			sourceLineageTag: b129e023-f6f7-4d63-9326-43a1322b52dc
+			dataCategory: Uncategorized
 
-		measure 'Cart Start+ Actions' = CALCULATE([Actions], REMOVEFILTERS(dim_event_type_kpi), dim_event_type_kpi[kpi_name] = "Cart Start+")
+		measure 'Cart Start+ Actions' = EXTERNALMEASURE("Cart Start+ Actions", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 08 LOB Action Totals
-			lineageTag: 3077ef2c-2da2-4532-b999-b791b08bf734
+			lineageTag: a8e46f90-3bf1-4064-8609-94e20ec81f0f
+			sourceLineageTag: 3077ef2c-2da2-4532-b999-b791b08bf734
+			dataCategory: Uncategorized
 
-		measure 'Order Actions' = CALCULATE([Actions], REMOVEFILTERS(dim_event_type_kpi), dim_event_type_kpi[kpi_name] = "Order")
+		measure 'Order Actions' = EXTERNALMEASURE("Order Actions", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 08 LOB Action Totals
-			lineageTag: 1b955667-4eb9-4ca6-8666-8e475e2c43a0
+			lineageTag: 7b040416-ce4f-4dea-aa72-111e102789e8
+			sourceLineageTag: 1b955667-4eb9-4ca6-8666-8e475e2c43a0
+			dataCategory: Uncategorized
 
-		measure 'PSVP+ Lead Actions' = CALCULATE([Actions], REMOVEFILTERS(dim_event_type_kpi), dim_event_type_kpi[kpi_name] = "PSVP+ Lead")
+		measure 'PSVP+ Lead Actions' = EXTERNALMEASURE("PSVP+ Lead Actions", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 08 LOB Action Totals
-			lineageTag: ba96f31a-fcd4-4096-a799-5d65a8e4e79e
+			lineageTag: b5f49742-ec21-48e9-b442-8c15853fa565
+			sourceLineageTag: ba96f31a-fcd4-4096-a799-5d65a8e4e79e
+			dataCategory: Uncategorized
 
-		measure 'Cart Start+ Metro Actions' = CALCULATE([Actions], REMOVEFILTERS(dim_event_type_kpi), dim_event_type_kpi[kpi_name] = "Cart Start+ Metro")
+		measure 'Cart Start+ Metro Actions' = EXTERNALMEASURE("Cart Start+ Metro Actions", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 08 LOB Action Totals
-			lineageTag: 9701b9f2-a3cf-4d2e-b70c-496af4a74952
+			lineageTag: 81a187cd-7ee5-4fcb-aa15-12478803869d
+			sourceLineageTag: 9701b9f2-a3cf-4d2e-b70c-496af4a74952
+			dataCategory: Uncategorized
 
-		measure 'Prepaid Upper Funnel Actions' = CALCULATE([Actions], REMOVEFILTERS(dim_event_type_kpi), dim_event_type_kpi[kpi_name] = "Prepaid Upper Funnel")
+		measure 'Prepaid Upper Funnel Actions' = EXTERNALMEASURE("Prepaid Upper Funnel Actions", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 08 LOB Action Totals
-			lineageTag: c493d917-7a56-4c51-87b7-a88a25371121
+			lineageTag: c3e18cc5-6fc0-4b99-9385-91c9f144e023
+			sourceLineageTag: c493d917-7a56-4c51-87b7-a88a25371121
+			dataCategory: Uncategorized
 
-		measure 'Quality Traffic Actions' = CALCULATE([Actions], REMOVEFILTERS(dim_event_type_kpi), dim_event_type_kpi[kpi_name] = "Quality Traffic")
+		measure 'Quality Traffic Actions' = EXTERNALMEASURE("Quality Traffic Actions", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 08 LOB Action Totals
-			lineageTag: 995509c5-745e-455d-8a36-954bbf0968e5
+			lineageTag: c5a205b3-1cb0-41e7-beaf-d00a4a17de6d
+			sourceLineageTag: 995509c5-745e-455d-8a36-954bbf0968e5
+			dataCategory: Uncategorized
 
-		measure 'Eligibility Check Actions' = CALCULATE([Actions], REMOVEFILTERS(dim_event_type_kpi), dim_event_type_kpi[kpi_name] = "Eligibility Check")
+		measure 'Eligibility Check Actions' = EXTERNALMEASURE("Eligibility Check Actions", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 08 LOB Action Totals
-			lineageTag: 64e2071d-fcc2-4ab7-ab5b-a0212500de09
+			lineageTag: f7ec3f73-6011-48f0-a44e-533bf4dcfdee
+			sourceLineageTag: 64e2071d-fcc2-4ab7-ab5b-a0212500de09
+			dataCategory: Uncategorized
 
-		measure 'Successful Eligibility Check Actions' = CALCULATE([Actions], REMOVEFILTERS(dim_event_type_kpi), dim_event_type_kpi[kpi_name] = "Successful Eligibility Check")
+		measure 'Successful Eligibility Check Actions' = EXTERNALMEASURE("Successful Eligibility Check Actions", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 08 LOB Action Totals
-			lineageTag: 08808a13-ee89-4b29-9c13-3068c69689b5
+			lineageTag: 1ce2daef-12dd-42e9-8cc9-76874438cbb9
+			sourceLineageTag: 08808a13-ee89-4b29-9c13-3068c69689b5
+			dataCategory: Uncategorized
 
-		measure 'TFB Mid Funnel Actions' = CALCULATE([Actions], REMOVEFILTERS(dim_event_type_kpi), dim_event_type_kpi[kpi_name] = "TFB Mid Funnel")
+		measure 'TFB Mid Funnel Actions' = EXTERNALMEASURE("TFB Mid Funnel Actions", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 08 LOB Action Totals
-			lineageTag: a7b817c6-f66e-48b1-89ab-623ed726ae4d
+			lineageTag: db936e1a-4b6a-4824-9ab1-8d5d6f7ab7d6
+			sourceLineageTag: a7b817c6-f66e-48b1-89ab-623ed726ae4d
+			dataCategory: Uncategorized
 
-		measure 'TFB Lead Actions' = CALCULATE([Actions], REMOVEFILTERS(dim_event_type_kpi), dim_event_type_kpi[kpi_name] = "TFB Lead")
+		measure 'TFB Lead Actions' = EXTERNALMEASURE("TFB Lead Actions", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 08 LOB Action Totals
-			lineageTag: 82d33360-fbf2-45ba-950c-f9af5578f878
+			lineageTag: 34bba993-5410-476f-b6af-860eeb9f6af8
+			sourceLineageTag: 82d33360-fbf2-45ba-950c-f9af5578f878
+			dataCategory: Uncategorized
 
-		measure 'TFB HINT EC Actions' = CALCULATE([Actions], REMOVEFILTERS(dim_event_type_kpi), dim_event_type_kpi[kpi_name] = "TFB HINT EC")
+		measure 'TFB HINT EC Actions' = EXTERNALMEASURE("TFB HINT EC Actions", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 08 LOB Action Totals
-			lineageTag: 1814b141-967a-4869-b02d-35c2921e6035
+			lineageTag: 5d53366b-146d-4fc6-ae29-8df80fc54346
+			sourceLineageTag: 1814b141-967a-4869-b02d-35c2921e6035
+			dataCategory: Uncategorized
 
-		measure 'TFB Mid Funnel CVR' = DIVIDE([TFB Mid Funnel Actions], [Total Clicks], BLANK())
+		measure 'TFB Mid Funnel CVR' = EXTERNALMEASURE("TFB Mid Funnel CVR", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0.00%
 			displayFolder: 13 TFB Metrics
-			lineageTag: 67c95490-0895-46f6-9b5e-7644a6bc1ef5
+			lineageTag: 24f87ded-b76e-4ee3-94a9-272e6b4501d2
+			sourceLineageTag: 67c95490-0895-46f6-9b5e-7644a6bc1ef5
+			dataCategory: Uncategorized
 
-		measure 'TFB Lead CVR' = DIVIDE([TFB Lead Actions], [Total Clicks], BLANK())
+		measure 'TFB Lead CVR' = EXTERNALMEASURE("TFB Lead CVR", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0.00%
 			displayFolder: 13 TFB Metrics
-			lineageTag: 17fcf21b-1a2b-45fe-ac53-b1064e6860f7
+			lineageTag: 16871296-64b0-4c4b-827f-95270d59d095
+			sourceLineageTag: 17fcf21b-1a2b-45fe-ac53-b1064e6860f7
+			dataCategory: Uncategorized
 
-		measure 'TFB HINT EC CVR' = DIVIDE([TFB HINT EC Actions], [Total Clicks], BLANK())
+		measure 'TFB HINT EC CVR' = EXTERNALMEASURE("TFB HINT EC CVR", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: 0.00%
 			displayFolder: 13 TFB Metrics
-			lineageTag: 7001bb8b-0d96-4e37-bca4-5f6c573df695
+			lineageTag: 94db78b7-c016-4ab0-b090-688dc1adf41d
+			sourceLineageTag: 7001bb8b-0d96-4e37-bca4-5f6c573df695
+			dataCategory: Uncategorized
 
-		measure 'CpMid Funnel' = DIVIDE([Total Cost], [TFB Mid Funnel Actions], BLANK())
+		measure 'CpMid Funnel' = EXTERNALMEASURE("CpMid Funnel", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.0
 			displayFolder: 13 TFB Metrics
-			lineageTag: 1b1a57a4-dd61-4205-914c-21b05dfb6a69
+			lineageTag: d19214ef-25c0-4ed4-970e-f1734e8117d6
+			sourceLineageTag: 1b1a57a4-dd61-4205-914c-21b05dfb6a69
+			dataCategory: Uncategorized
 
-			annotation PBI_FormatHint = {"isCustom":true}
-
-		measure CpL = DIVIDE([Total Cost], [TFB Lead Actions], BLANK())
+		measure CpL = EXTERNALMEASURE("CpL", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.0
 			displayFolder: 13 TFB Metrics
-			lineageTag: d4123383-054b-44ba-9df8-a9d1982832c4
+			lineageTag: 56b93772-7b41-4e82-b8b0-75c6c310f2ca
+			sourceLineageTag: d4123383-054b-44ba-9df8-a9d1982832c4
+			dataCategory: Uncategorized
 
-			annotation PBI_FormatHint = {"isCustom":true}
-
-		measure 'CpTFB HINT EC' = DIVIDE([Total Cost], [TFB HINT EC Actions], BLANK())
+		measure 'CpTFB HINT EC' = EXTERNALMEASURE("CpTFB HINT EC", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.00
 			displayFolder: 13 TFB Metrics
-			lineageTag: d1bd2602-2c5a-4235-b5c2-cfe5c9457df8
+			lineageTag: a33e1638-57be-4308-9f6d-c063d34ccf39
+			sourceLineageTag: d1bd2602-2c5a-4235-b5c2-cfe5c9457df8
+			dataCategory: Uncategorized
 
-		measure CpEC =
-				
-				VAR _v = DIVIDE([Total Cost], [Eligibility Check Actions], BLANK())
-				RETURN
-				IF(
-				    ISBLANK(_v),
-				    BLANK(),
-				    IF(
-				        ABS(_v) >= 1000,
-				        FORMAT(_v / 1000, "$#,##0.0K"),
-				        FORMAT(_v, "$#,##0.0")
-				    )
-				)
+		measure CpEC = EXTERNALMEASURE("CpEC", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 12 Broadband Metrics
-			lineageTag: 83e9cce1-542b-4efd-86c9-2e7e5486f354
+			lineageTag: c3d72928-0066-45e1-abda-3f0d882e82c7
+			sourceLineageTag: 83e9cce1-542b-4efd-86c9-2e7e5486f354
+			dataCategory: Uncategorized
 
-		measure CpSEC = DIVIDE([Total Cost], [Successful Eligibility Check Actions], BLANK())
+		measure CpSEC = EXTERNALMEASURE("CpSEC", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.0
 			displayFolder: 12 Broadband Metrics
-			lineageTag: 5b8e8ddd-3d5b-4797-9658-38b82dc6469b
+			lineageTag: e1db30a2-a0b0-4935-84d1-e1ef04d40547
+			sourceLineageTag: 5b8e8ddd-3d5b-4797-9658-38b82dc6469b
+			dataCategory: Uncategorized
 
-			annotation PBI_FormatHint = {"isCustom":true}
-
-		measure CpOrder = DIVIDE([Total Cost], [Order Actions], BLANK())
+		measure CpOrder = EXTERNALMEASURE("CpOrder", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.0
 			displayFolder: 12 Broadband Metrics
-			lineageTag: fe7a2ffb-820c-4319-adcd-523b27339930
+			lineageTag: e7f16a21-579a-4da5-bf53-35ad5b4b7fe7
+			sourceLineageTag: fe7a2ffb-820c-4319-adcd-523b27339930
+			dataCategory: Uncategorized
 
-			annotation PBI_FormatHint = {"isCustom":true}
-
-		measure $/Order = DIVIDE([Total Cost], [Order Actions], BLANK())
+		measure $/Order = EXTERNALMEASURE("$/Order", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: $#,##0.0
 			displayFolder: 12 Broadband Metrics
-			lineageTag: 35496aff-8b0d-402d-8631-6463a1e9c807
+			lineageTag: 39e38f1d-191a-4103-850c-0f9a3054b93a
+			sourceLineageTag: 35496aff-8b0d-402d-8631-6463a1e9c807
+			dataCategory: Uncategorized
 
-			annotation PBI_FormatHint = {"isCustom":true}
-
-		measure 'eCPA (TBD)' = "eCPA - definition TBD"
+		measure 'eCPA (TBD)' = EXTERNALMEASURE("eCPA (TBD)", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 14 Placeholders
-			lineageTag: 621daff5-df8e-40ba-b07f-400152f58dc7
+			lineageTag: 1a0bf7d8-3522-4147-9909-0576426122b0
+			sourceLineageTag: 621daff5-df8e-40ba-b07f-400152f58dc7
+			dataCategory: Uncategorized
 
-		measure 'CPC v1 (Pending)' = "CPC v1 - pending feed"
+		measure 'CPC v1 (Pending)' = EXTERNALMEASURE("CPC v1 (Pending)", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 14 Placeholders
-			lineageTag: 431f3263-e5a6-4e69-b1f9-65b64764e8ec
+			lineageTag: 3aed9235-a61b-4dfc-a3ad-b05f005b3fb2
+			sourceLineageTag: 431f3263-e5a6-4e69-b1f9-65b64764e8ec
+			dataCategory: Uncategorized
 
-		measure '$/Order Previous Period' =
-				
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				    IF(
-				        ISBLANK(MaxDate),
-				        BLANK(),
-				        CALCULATE(
-				            [$/Order],
-				            DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
-				        )
-				    )
+		measure '$/Order Previous Period' = EXTERNALMEASURE("$/Order Previous Period", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 12 Broadband Metrics
-			lineageTag: 0d122a79-9c26-433f-b0a9-ca0dcfac060b
+			lineageTag: ef6c30a3-3172-4da9-898a-7397f3b0c213
+			sourceLineageTag: 0d122a79-9c26-433f-b0a9-ca0dcfac060b
+			dataCategory: Uncategorized
 
-			annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-		measure 'CpEC Previous Period' =
-				
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				    IF(
-				        ISBLANK(MaxDate),
-				        BLANK(),
-				        CALCULATE(
-				            [CpEC],
-				            DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
-				        )
-				    )
+		measure 'CpEC Previous Period' = EXTERNALMEASURE("CpEC Previous Period", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 12 Broadband Metrics
-			lineageTag: d8fcd172-8792-4d50-aa17-f192b18cf099
+			lineageTag: 5ab6a766-45e0-4aa5-8cf0-d4901301f01e
+			sourceLineageTag: d8fcd172-8792-4d50-aa17-f192b18cf099
+			dataCategory: Uncategorized
 
-			annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-		measure 'CpSEC Previous Period' =
-				
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				    IF(
-				        ISBLANK(MaxDate),
-				        BLANK(),
-				        CALCULATE(
-				            [CpSEC],
-				            DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
-				        )
-				    )
+		measure 'CpSEC Previous Period' = EXTERNALMEASURE("CpSEC Previous Period", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 12 Broadband Metrics
-			lineageTag: ebb0a08a-0dbd-444b-acb4-072a4194fcfe
+			lineageTag: 3623090f-d511-4895-9d35-01dfa0b15a10
+			sourceLineageTag: ebb0a08a-0dbd-444b-acb4-072a4194fcfe
+			dataCategory: Uncategorized
 
-			annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-		measure 'CpOrder Previous Period' =
-				
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				    IF(
-				        ISBLANK(MaxDate),
-				        BLANK(),
-				        CALCULATE(
-				            [CpOrder],
-				            DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
-				        )
-				    )
+		measure 'CpOrder Previous Period' = EXTERNALMEASURE("CpOrder Previous Period", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 12 Broadband Metrics
-			lineageTag: f7d490c2-a75f-42ee-9107-553e0de6645f
+			lineageTag: a5b119bc-27c9-443e-aeda-c7420472b26b
+			sourceLineageTag: f7d490c2-a75f-42ee-9107-553e0de6645f
+			dataCategory: Uncategorized
 
-			annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-		measure '$/Order Previous Label' =
-				
-				VAR _p = [$/Order Previous Period]
-				RETURN "vs previous: " & IF(ABS(_p) >= 1000, "$" & FORMAT(COALESCE(_p/1000,0), "0.0") & "K", "$" & FORMAT(COALESCE(_p,0), "#,##0.0"))
+		measure '$/Order Previous Label' = EXTERNALMEASURE("$/Order Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: a6802203-a582-470c-a9f3-dbf88277a131
+			lineageTag: d6b4ba80-f8a7-4b60-ae38-71d59c1ff03b
+			sourceLineageTag: a6802203-a582-470c-a9f3-dbf88277a131
+			dataCategory: Uncategorized
 
-		measure '$/Order Change Label' =
-				VAR _cur = [$/Order]
-				VAR _prev = [$/Order Previous Period]
-				VAR _pct = DIVIDE(_cur - _prev, _prev)
-				RETURN
-				IF(
-				    ISBLANK(_pct),
-				    "—",
-				    IF(
-				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				        IF(
-				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				            "0.0%"
-				        )
-				    )
-				)
+		measure '$/Order Change Label' = EXTERNALMEASURE("$/Order Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 80ef669a-cd08-4cf7-b981-0f72e0245530
+			lineageTag: 644c5e1e-2514-4151-9637-354209400ca2
+			sourceLineageTag: 80ef669a-cd08-4cf7-b981-0f72e0245530
+			dataCategory: Uncategorized
 
-		measure '$/Order Label Color' =
-				VAR _cur = [$/Order]
-				VAR _prev = [$/Order Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#D13438",
-				        _cur < _prev, "#00A651",
-				        "#808080"
-				    )
+		measure '$/Order Label Color' = EXTERNALMEASURE("$/Order Label Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 70ecb185-7b83-4d7a-8049-1f4c8dd5b9d0
+			lineageTag: 7ad2c33c-20f3-4afa-9b2b-b01f09637a58
+			sourceLineageTag: 70ecb185-7b83-4d7a-8049-1f4c8dd5b9d0
+			dataCategory: Uncategorized
 
-		measure 'CpEC Previous Label' =
-				
-				VAR _p = [CpEC Previous Period]
-				RETURN "vs previous: " & IF(ABS(_p) >= 1000, "$" & FORMAT(COALESCE(_p/1000,0), "0.0") & "K", FORMAT(COALESCE(_p,0), "#,##0.00"))
+		measure 'CpEC Previous Label' = EXTERNALMEASURE("CpEC Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 4e2ff91b-c815-4cf0-977c-846ab2eda8cf
+			lineageTag: fd2eb6be-7af8-4cd6-a27c-d659c7bb9c4c
+			sourceLineageTag: 4e2ff91b-c815-4cf0-977c-846ab2eda8cf
+			dataCategory: Uncategorized
 
-		measure 'CpEC Change Label' =
-				VAR _cur = [CpEC]
-				VAR _prev = [CpEC Previous Period]
-				VAR _pct = DIVIDE(_cur - _prev, _prev)
-				RETURN
-				IF(
-				    ISBLANK(_pct),
-				    "—",
-				    IF(
-				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				        IF(
-				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				            "0.0%"
-				        )
-				    )
-				)
+		measure 'CpEC Change Label' = EXTERNALMEASURE("CpEC Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: d70051cb-630f-450b-bdb9-ebccd661246a
+			lineageTag: ca61fca3-1d12-45e6-8f89-8d1e5c795ee0
+			sourceLineageTag: d70051cb-630f-450b-bdb9-ebccd661246a
+			dataCategory: Uncategorized
 
-		measure 'CpEC Label Color' =
-				VAR _cur = [CpEC]
-				VAR _prev = [CpEC Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#D13438",
-				        _cur < _prev, "#00A651",
-				        "#808080"
-				    )
+		measure 'CpEC Label Color' = EXTERNALMEASURE("CpEC Label Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 03feeafc-a95d-48e8-969e-ca1c9b6c0cc7
+			lineageTag: 558f106b-8d1b-4525-8cc6-db445ea2a17d
+			sourceLineageTag: 03feeafc-a95d-48e8-969e-ca1c9b6c0cc7
+			dataCategory: Uncategorized
 
-		measure 'CpSEC Previous Label' =
-				
-				VAR _p = [CpSEC Previous Period]
-				RETURN "vs previous: " & IF(ABS(_p) >= 1000, "$" & FORMAT(COALESCE(_p/1000,0), "0.0") & "K", "$" & FORMAT(COALESCE(_p,0), "#,##0.0"))
+		measure 'CpSEC Previous Label' = EXTERNALMEASURE("CpSEC Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 4a050700-19ba-4fe2-b86d-7abe97d6ed96
+			lineageTag: ea57b5a4-6b3d-40da-b339-14797dc1016f
+			sourceLineageTag: 4a050700-19ba-4fe2-b86d-7abe97d6ed96
+			dataCategory: Uncategorized
 
-		measure 'CpSEC Change Label' =
-				VAR _cur = [CpSEC]
-				VAR _prev = [CpSEC Previous Period]
-				VAR _pct = DIVIDE(_cur - _prev, _prev)
-				RETURN
-				IF(
-				    ISBLANK(_pct),
-				    "—",
-				    IF(
-				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				        IF(
-				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				            "0.0%"
-				        )
-				    )
-				)
+		measure 'CpSEC Change Label' = EXTERNALMEASURE("CpSEC Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 5c4eeed6-94f0-4bf1-92b6-e87ef7dd7c5d
+			lineageTag: a61dfe6b-f69d-430a-a435-e3ed5867f81e
+			sourceLineageTag: 5c4eeed6-94f0-4bf1-92b6-e87ef7dd7c5d
+			dataCategory: Uncategorized
 
-		measure 'CpSEC Label Color' =
-				VAR _cur = [CpSEC]
-				VAR _prev = [CpSEC Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#D13438",
-				        _cur < _prev, "#00A651",
-				        "#808080"
-				    )
+		measure 'CpSEC Label Color' = EXTERNALMEASURE("CpSEC Label Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 3c3b5266-9a3e-4c5e-83bc-008b6531bb68
+			lineageTag: 3224251d-4d1c-4328-bb76-e67c2295ab73
+			sourceLineageTag: 3c3b5266-9a3e-4c5e-83bc-008b6531bb68
+			dataCategory: Uncategorized
 
-		measure 'CpOrder Previous Label' =
-				
-				VAR _p = [CpOrder Previous Period]
-				RETURN "vs previous: " & IF(ABS(_p) >= 1000, "$" & FORMAT(COALESCE(_p/1000,0), "0.0") & "K", "$" & FORMAT(COALESCE(_p,0), "#,##0.0"))
+		measure 'CpOrder Previous Label' = EXTERNALMEASURE("CpOrder Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: a19d422b-01ac-4373-994f-57747bff7323
+			lineageTag: 532124bf-fbb6-475a-87e9-ae56a30aaf3c
+			sourceLineageTag: a19d422b-01ac-4373-994f-57747bff7323
+			dataCategory: Uncategorized
 
-		measure 'CpOrder Change Label' =
-				VAR _cur = [CpOrder]
-				VAR _prev = [CpOrder Previous Period]
-				VAR _pct = DIVIDE(_cur - _prev, _prev)
-				RETURN
-				IF(
-				    ISBLANK(_pct),
-				    "—",
-				    IF(
-				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				        IF(
-				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				            "0.0%"
-				        )
-				    )
-				)
+		measure 'CpOrder Change Label' = EXTERNALMEASURE("CpOrder Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: adbd91d1-4b60-4292-bcbe-52f68f915014
+			lineageTag: 1df1f9a9-4f86-48c0-a1ce-2f2d375ffef9
+			sourceLineageTag: adbd91d1-4b60-4292-bcbe-52f68f915014
+			dataCategory: Uncategorized
 
-		measure 'CpOrder Label Color' =
-				VAR _cur = [CpOrder]
-				VAR _prev = [CpOrder Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#D13438",
-				        _cur < _prev, "#00A651",
-				        "#808080"
-				    )
+		measure 'CpOrder Label Color' = EXTERNALMEASURE("CpOrder Label Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 336ae68b-f205-418b-9fde-550fd8cdcd22
+			lineageTag: 636b7168-2c1a-48b0-a9d6-64609c2ce4f5
+			sourceLineageTag: 336ae68b-f205-418b-9fde-550fd8cdcd22
+			dataCategory: Uncategorized
 
-		measure 'Total Clicks Label' =
-				VAR _v = [Total Clicks]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_v), BLANK(),
-				        ABS(_v) >= 1000000, FORMAT(_v / 1000000, "#,##0.0M"),
-				        ABS(_v) >= 1000, FORMAT(_v / 1000, "#,##0.0K"),
-				        FORMAT(_v, "#,##0")
-				    )
+		measure 'Total Clicks Label' = EXTERNALMEASURE("Total Clicks Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 02 Click KPIs
-			lineageTag: 40f9b29b-9d52-4a3f-bb59-eb1149851d9f
+			lineageTag: 3f887256-03b3-4d4b-86e0-61b6c3976ad8
+			sourceLineageTag: 40f9b29b-9d52-4a3f-bb59-eb1149851d9f
+			dataCategory: Uncategorized
+
+		measure 'CpL Previous Period' = EXTERNALMEASURE("CpL Previous Period", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			formatString: $#,##0.0
+			displayFolder: 13 TFB Metrics
+			lineageTag: 76c52d43-a16f-4a82-84fa-636c2db09ed5
+			sourceLineageTag: 86389934-491a-459a-a1c6-b3a8c7592a9e
+			dataCategory: Uncategorized
+
+		measure 'CpL Previous Label' = EXTERNALMEASURE("CpL Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			displayFolder: 07 KPI Card Labels
+			lineageTag: 15c5e8e5-fbbc-4bdf-98e9-d0cbde8dedc0
+			sourceLineageTag: be900d6a-293d-4fcc-9997-a0593c879610
+			dataCategory: Uncategorized
+
+		measure 'CpL Change Label' = EXTERNALMEASURE("CpL Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			displayFolder: 07 KPI Card Labels
+			lineageTag: 4895c2fe-e2fb-4c43-8033-a2744657cba0
+			sourceLineageTag: c4425b1e-60d9-44c4-8b4b-202027a122f6
+			dataCategory: Uncategorized
+
+		measure 'CpL Label Color' = EXTERNALMEASURE("CpL Label Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			displayFolder: 07 KPI Card Labels
+			lineageTag: 18eda2b4-2b97-447d-acce-f467f193c671
+			sourceLineageTag: 2981123e-72cb-4e05-93ce-dd003a6c03c9
+			dataCategory: Uncategorized
+
+		measure 'CpMid Funnel Previous Period' = EXTERNALMEASURE("CpMid Funnel Previous Period", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			formatString: $#,##0.00
+			displayFolder: 13 TFB Metrics
+			lineageTag: fd416a82-a049-44a2-9173-9aaad994f931
+			sourceLineageTag: f0bf8da9-853d-49a4-9ce7-8274c5ad0ca3
+			dataCategory: Uncategorized
+
+		measure 'CpMid Funnel Previous Label' = EXTERNALMEASURE("CpMid Funnel Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			displayFolder: 07 KPI Card Labels
+			lineageTag: 917bae98-8519-4186-b517-03bb44b374ad
+			sourceLineageTag: 6115fa84-8dd5-4588-a699-9025be5d0ede
+			dataCategory: Uncategorized
+
+		measure 'CpMid Funnel Change Label' = EXTERNALMEASURE("CpMid Funnel Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			displayFolder: 07 KPI Card Labels
+			lineageTag: d25880f4-5d69-478a-9b6b-b79f8c5d345b
+			sourceLineageTag: 354de0e0-83fc-489b-ada8-83b4514c275e
+			dataCategory: Uncategorized
+
+		measure 'CpMid Funnel Label Color' = EXTERNALMEASURE("CpMid Funnel Label Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			displayFolder: 07 KPI Card Labels
+			lineageTag: 1943fd07-b6c5-49f8-a52a-d5e3a8ea406f
+			sourceLineageTag: bfb52f88-46b8-4bf7-ad1e-b898e1c94337
+			dataCategory: Uncategorized
+
+		measure 'CpTFB HINT EC Previous Period' = EXTERNALMEASURE("CpTFB HINT EC Previous Period", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			formatString: $#,##0.00
+			displayFolder: 13 TFB Metrics
+			lineageTag: d670414c-5bb6-48db-b93e-90bc0439e442
+			sourceLineageTag: 9a670832-7c61-42f5-97a4-bca14a633965
+			dataCategory: Uncategorized
+
+		measure 'CpTFB HINT EC Previous Label' = EXTERNALMEASURE("CpTFB HINT EC Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			displayFolder: 07 KPI Card Labels
+			lineageTag: ea9c9a25-c3d1-4cac-98da-a47f4da0cd32
+			sourceLineageTag: 8da308be-36a2-4a4b-bdbe-82d1ca312977
+			dataCategory: Uncategorized
+
+		measure 'CpTFB HINT EC Change Label' = EXTERNALMEASURE("CpTFB HINT EC Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			displayFolder: 07 KPI Card Labels
+			lineageTag: 9e3126c1-0548-4ff5-b88f-a96171181cd3
+			sourceLineageTag: 5b864a2b-fb1b-4398-8e95-a5e52fce2ad1
+			dataCategory: Uncategorized
+
+		measure 'CpTFB HINT EC Label Color' = EXTERNALMEASURE("CpTFB HINT EC Label Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			displayFolder: 07 KPI Card Labels
+			lineageTag: d4217a39-6791-48a2-bb0a-92ac549e980e
+			sourceLineageTag: 8f17243d-41ac-4b4f-b737-34cc78d29fc3
+			dataCategory: Uncategorized
+
+		measure 'TFB HINT EC CVR Previous Period' = EXTERNALMEASURE("TFB HINT EC CVR Previous Period", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			formatString: 0.00%
+			displayFolder: 13 TFB Metrics
+			lineageTag: f25873f1-342b-4e1d-b64e-90f4f75598a3
+			sourceLineageTag: c6543d61-a447-4423-a33a-14b7dabceea0
+			dataCategory: Uncategorized
+
+		measure 'TFB HINT EC CVR Previous Label' = EXTERNALMEASURE("TFB HINT EC CVR Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			displayFolder: 07 KPI Card Labels
+			lineageTag: 808e0367-b7f2-4520-add2-cb91f19218bf
+			sourceLineageTag: a656e451-7fb6-41e1-bc93-88cb7531d76b
+			dataCategory: Uncategorized
+
+		measure 'TFB HINT EC CVR Change Label' = EXTERNALMEASURE("TFB HINT EC CVR Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			displayFolder: 07 KPI Card Labels
+			lineageTag: e11e7d95-2a71-4e4e-a097-e23f89768cb2
+			sourceLineageTag: 06bce398-7e0b-441c-be35-1d536ebf6daf
+			dataCategory: Uncategorized
+
+		measure 'TFB HINT EC CVR Label Color' = EXTERNALMEASURE("TFB HINT EC CVR Label Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			displayFolder: 07 KPI Card Labels
+			lineageTag: 04c369b0-bcdb-4035-827d-86648faa7435
+			sourceLineageTag: 619a66a5-88c9-400f-a2df-f90af7571454
+			dataCategory: Uncategorized
+
+		measure 'TFB Lead CVR Previous Period' = EXTERNALMEASURE("TFB Lead CVR Previous Period", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			formatString: 0.00%
+			displayFolder: 13 TFB Metrics
+			lineageTag: 2a206146-7140-436d-a241-dd2b332ad8bd
+			sourceLineageTag: bd1a2a19-5183-4fc4-bb0e-6e5fd2c9bead
+			dataCategory: Uncategorized
+
+		measure 'TFB Lead CVR Previous Label' = EXTERNALMEASURE("TFB Lead CVR Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			displayFolder: 07 KPI Card Labels
+			lineageTag: 8624025a-0b51-4383-89b2-82ea4ea966da
+			sourceLineageTag: 80b5f171-a1ab-4b53-9e93-7e3cd85fe4d6
+			dataCategory: Uncategorized
+
+		measure 'TFB Lead CVR Change Label' = EXTERNALMEASURE("TFB Lead CVR Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			displayFolder: 07 KPI Card Labels
+			lineageTag: c4d3e316-02dc-4d01-9d39-24ca9886846f
+			sourceLineageTag: 93315cf0-463b-4bf4-9e2b-90355d2a701d
+			dataCategory: Uncategorized
+
+		measure 'TFB Lead CVR Label Color' = EXTERNALMEASURE("TFB Lead CVR Label Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			displayFolder: 07 KPI Card Labels
+			lineageTag: b65bd126-c2ec-4f05-b6b5-b28e3f502fff
+			sourceLineageTag: db547837-d6fb-4db9-8d21-552efd637969
+			dataCategory: Uncategorized
+
+		measure 'TFB Mid Funnel CVR Previous Period' = EXTERNALMEASURE("TFB Mid Funnel CVR Previous Period", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			formatString: 0.00%
+			displayFolder: 13 TFB Metrics
+			lineageTag: bd09ef88-7ba2-4238-a563-ac78e65ff960
+			sourceLineageTag: 86bd5ca9-e12a-43fb-9941-981b98102920
+			dataCategory: Uncategorized
+
+		measure 'TFB Mid Funnel CVR Previous Label' = EXTERNALMEASURE("TFB Mid Funnel CVR Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			displayFolder: 07 KPI Card Labels
+			lineageTag: 0e2e6cd8-7c0b-475a-aee4-249226bba1c1
+			sourceLineageTag: d3ad60f5-7d85-43c1-9c63-074cb0e9a8e1
+			dataCategory: Uncategorized
+
+		measure 'TFB Mid Funnel CVR Change Label' = EXTERNALMEASURE("TFB Mid Funnel CVR Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			displayFolder: 07 KPI Card Labels
+			lineageTag: c59c4ee1-7017-4700-98f3-4f8aa398e352
+			sourceLineageTag: 85e4ec80-5089-43ce-9b95-4ee4f234f452
+			dataCategory: Uncategorized
+
+		measure 'TFB Mid Funnel CVR Label Color' = EXTERNALMEASURE("TFB Mid Funnel CVR Label Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			displayFolder: 07 KPI Card Labels
+			lineageTag: 4ebc78fd-7ceb-468d-bdbc-892d87c0734b
+			sourceLineageTag: e2d4e96c-56d7-48f1-9532-1c8a8b96172b
+			dataCategory: Uncategorized
+
+		measure 'Total Cost label' = EXTERNALMEASURE("Total Cost label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			displayFolder: 01 Cost KPIs
+			lineageTag: 30c6b6ce-c92d-47ff-8ae9-1046eb6733f0
+			sourceLineageTag: d3821abd-3398-4987-a015-d6c155600144
+			dataCategory: Uncategorized
+
+		measure 'Action Cost label' = EXTERNALMEASURE("Action Cost label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			displayFolder: 01 Cost KPIs
+			lineageTag: b2ae4dff-5cc7-413b-b634-ebf831e4d69f
+			sourceLineageTag: e9b6cb5a-efa3-4e76-83af-2cbfb66651dd
+			dataCategory: Uncategorized
+
+		measure 'Other Cost label' = EXTERNALMEASURE("Other Cost label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			displayFolder: 01 Cost KPIs
+			lineageTag: ef13fcec-525a-49d0-aa3b-bcf45401ec08
+			sourceLineageTag: a2425b25-6589-483e-a533-1f7904ac885c
+			dataCategory: Uncategorized
+
+		measure 'Payable Click Cost label' = EXTERNALMEASURE("Payable Click Cost label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			displayFolder: 01 Cost KPIs
+			lineageTag: 1097a05d-46ee-4909-beea-dd9a02e865e5
+			sourceLineageTag: d69f2781-e0ff-4a15-a3b9-c91b61f2e281
+			dataCategory: Uncategorized
+
+		measure Measure = EXTERNALMEASURE("Measure", INTEGER, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			formatString: 0
+			displayFolder: 01 Cost KPIs
+			lineageTag: 81a3478b-7e82-422d-9ee9-0da7649bf151
+			sourceLineageTag: 3c76b5ba-6b5a-4e0e-a4b6-cec9bc6bcd12
+			dataCategory: Uncategorized
 
 		/// Previous-period value for TFB Lead Actions
-		measure 'TFB Lead Actions Previous Period' =
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				    IF(
-				        ISBLANK(MaxDate),
-				        BLANK(),
-				        CALCULATE(
-				            [TFB Lead Actions],
-				            REMOVEFILTERS(dim_date),
-				            DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
-				        )
-				    )
+		measure 'TFB Lead Actions Previous Period' = EXTERNALMEASURE("TFB Lead Actions Previous Period", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 13 TFB Metrics
-			lineageTag: 6d03c9e3-f715-4e64-98bc-7ceffbedacdf
+			lineageTag: 96c37e0b-c772-4403-b2f8-1ccb75d3f458
+			sourceLineageTag: 6d03c9e3-f715-4e64-98bc-7ceffbedacdf
+			dataCategory: Uncategorized
 
-		measure 'TFB Lead Previous Label' =
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				VAR _prev =
-					CALCULATE(
-						[TFB Lead Actions],
-						REMOVEFILTERS(dim_date),
-						DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
-					)
-				RETURN
-					"vs previous: " &
-					SWITCH(
-						TRUE(),
-						ISBLANK(_prev), "N/A",
-						ABS(_prev) >= 1000000, FORMAT(_prev / 1000000, "#,##0.0M"),
-						ABS(_prev) >= 1000, FORMAT(_prev / 1000, "#,##0.0K"),
-						FORMAT(_prev, "#,##0")
-					)
+		measure 'TFB Lead Previous Label' = EXTERNALMEASURE("TFB Lead Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 943b775b-6807-4d07-9714-ffbafaa8ff33
-		measure 'TFB Lead Change Label' =
-				VAR _cur = [TFB Lead Actions]
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				VAR _prev = CALCULATE([TFB Lead Actions], REMOVEFILTERS(dim_date), DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate))
-				VAR _pct = DIVIDE(_cur - _prev, _prev)
-				RETURN
-					IF(
-						ISBLANK(_pct),
-						"—",
-						SWITCH(TRUE(), _cur > _prev, "▴ " & FORMAT(ABS(_pct), "#,##0.0%"), _cur < _prev, "▾ " & FORMAT(ABS(_pct), "#,##0.0%"), "0.0%")
-					)
+			lineageTag: f72c77d0-9cac-43f1-993a-df6b1e29edab
+			sourceLineageTag: 943b775b-6807-4d07-9714-ffbafaa8ff33
+			dataCategory: Uncategorized
+
+		measure 'TFB Lead Change Label' = EXTERNALMEASURE("TFB Lead Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: a2d42e62-1fe1-426e-9d37-8a8916459dc0
-		measure 'TFB Lead Label Color' =
-				VAR _cur = [TFB Lead Actions]
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				VAR _prev = CALCULATE([TFB Lead Actions], REMOVEFILTERS(dim_date), DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate))
-				RETURN SWITCH(TRUE(), ISBLANK(_prev), "#808080", _cur > _prev, "#00A651", _cur < _prev, "#D13438", "#808080")
+			lineageTag: ddff0307-731b-404f-9d2e-55931b64b7b9
+			sourceLineageTag: a2d42e62-1fe1-426e-9d37-8a8916459dc0
+			dataCategory: Uncategorized
+
+		measure 'TFB Lead Label Color' = EXTERNALMEASURE("TFB Lead Label Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: b132a7f9-7c37-4ef3-a7d7-222164097054
+			lineageTag: 570a0ca0-d97e-4f35-9f2b-e335dfabbcf3
+			sourceLineageTag: b132a7f9-7c37-4ef3-a7d7-222164097054
+			dataCategory: Uncategorized
+
 		/// Previous-period value for TFB Mid Funnel Actions
-		measure 'TFB Mid Funnel Actions Previous Period' =
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				    IF(
-				        ISBLANK(MaxDate),
-				        BLANK(),
-				        CALCULATE(
-				            [TFB Mid Funnel Actions],
-				            REMOVEFILTERS(dim_date),
-				            DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
-				        )
-				    )
+		measure 'TFB Mid Funnel Actions Previous Period' = EXTERNALMEASURE("TFB Mid Funnel Actions Previous Period", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 13 TFB Metrics
-			lineageTag: caf2af92-3aa0-47c9-81c3-6c8f717108b6
+			lineageTag: c8e73934-234d-488b-9bc5-43d3aa9ea792
+			sourceLineageTag: caf2af92-3aa0-47c9-81c3-6c8f717108b6
+			dataCategory: Uncategorized
 
-		measure 'TFB Mid Funnel Previous Label' =
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				VAR _prev = CALCULATE([TFB Mid Funnel Actions], REMOVEFILTERS(dim_date), DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate))
-				RETURN "vs previous: " & SWITCH(TRUE(), ISBLANK(_prev), "N/A", ABS(_prev) >= 1000000, FORMAT(_prev / 1000000, "#,##0.0M"), ABS(_prev) >= 1000, FORMAT(_prev / 1000, "#,##0.0K"), FORMAT(_prev, "#,##0"))
+		measure 'TFB Mid Funnel Previous Label' = EXTERNALMEASURE("TFB Mid Funnel Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 5a42c04b-08ea-44d0-a3df-b3c0d25356c7
-		measure 'TFB Mid Funnel Change Label' =
-				VAR _cur = [TFB Mid Funnel Actions]
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				VAR _prev = CALCULATE([TFB Mid Funnel Actions], REMOVEFILTERS(dim_date), DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate))
-				VAR _pct = DIVIDE(_cur - _prev, _prev)
-				RETURN IF(ISBLANK(_pct), "—", SWITCH(TRUE(), _cur > _prev, "▴ " & FORMAT(ABS(_pct), "#,##0.0%"), _cur < _prev, "▾ " & FORMAT(ABS(_pct), "#,##0.0%"), "0.0%"))
+			lineageTag: 12619799-e24b-4377-b563-b841ecd98a49
+			sourceLineageTag: 5a42c04b-08ea-44d0-a3df-b3c0d25356c7
+			dataCategory: Uncategorized
+
+		measure 'TFB Mid Funnel Change Label' = EXTERNALMEASURE("TFB Mid Funnel Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 139f64ee-b0ea-4789-8f0f-32617fbc5220
-		measure 'TFB Mid Funnel Label Color' =
-				VAR _cur = [TFB Mid Funnel Actions]
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				VAR _prev = CALCULATE([TFB Mid Funnel Actions], REMOVEFILTERS(dim_date), DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate))
-				RETURN SWITCH(TRUE(), ISBLANK(_prev), "#808080", _cur > _prev, "#00A651", _cur < _prev, "#D13438", "#808080")
+			lineageTag: be5214b2-cf1c-47d6-866b-c99bd11a1cc2
+			sourceLineageTag: 139f64ee-b0ea-4789-8f0f-32617fbc5220
+			dataCategory: Uncategorized
+
+		measure 'TFB Mid Funnel Label Color' = EXTERNALMEASURE("TFB Mid Funnel Label Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 0bcacff3-e116-4ca3-bd9d-485ef6d164a4
+			lineageTag: 225b78c9-658b-40e9-aae0-59eae51474f5
+			sourceLineageTag: 0bcacff3-e116-4ca3-bd9d-485ef6d164a4
+			dataCategory: Uncategorized
+
 		/// Previous-period value for TFB HINT EC Actions
-		measure 'TFB HINT EC Actions Previous Period' =
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				    IF(
-				        ISBLANK(MaxDate),
-				        BLANK(),
-				        CALCULATE(
-				            [TFB HINT EC Actions],
-				            REMOVEFILTERS(dim_date),
-				            DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)
-				        )
-				    )
+		measure 'TFB HINT EC Actions Previous Period' = EXTERNALMEASURE("TFB HINT EC Actions Previous Period", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			formatString: #,##0
 			displayFolder: 13 TFB Metrics
-			lineageTag: b6db7c07-c289-4853-8acd-beb9669bdafb
+			lineageTag: 4852f68e-0909-4786-823e-3ec6b6a6a407
+			sourceLineageTag: b6db7c07-c289-4853-8acd-beb9669bdafb
+			dataCategory: Uncategorized
 
-		measure 'TFB HINT EC Previous Label' =
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				VAR _prev = CALCULATE([TFB HINT EC Actions], REMOVEFILTERS(dim_date), DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate))
-				RETURN "vs previous: " & SWITCH(TRUE(), ISBLANK(_prev), "N/A", ABS(_prev) >= 1000000, FORMAT(_prev / 1000000, "#,##0.0M"), ABS(_prev) >= 1000, FORMAT(_prev / 1000, "#,##0.0K"), FORMAT(_prev, "#,##0"))
+		measure 'TFB HINT EC Previous Label' = EXTERNALMEASURE("TFB HINT EC Previous Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: d8ef2411-3868-48ca-b66e-92d3853fe616
-		measure 'TFB HINT EC Change Label' =
-				VAR _cur = [TFB HINT EC Actions]
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				VAR _prev = CALCULATE([TFB HINT EC Actions], REMOVEFILTERS(dim_date), DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate))
-				VAR _pct = DIVIDE(_cur - _prev, _prev)
-				RETURN IF(ISBLANK(_pct), "—", SWITCH(TRUE(), _cur > _prev, "▴ " & FORMAT(ABS(_pct), "#,##0.0%"), _cur < _prev, "▾ " & FORMAT(ABS(_pct), "#,##0.0%"), "0.0%"))
+			lineageTag: 5dcf2bb8-0a1e-4918-aa0f-8f9c2181a67e
+			sourceLineageTag: d8ef2411-3868-48ca-b66e-92d3853fe616
+			dataCategory: Uncategorized
+
+		measure 'TFB HINT EC Change Label' = EXTERNALMEASURE("TFB HINT EC Change Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: 2e1d4073-f716-4d4e-91d5-a2f83f78cda2
-		measure 'TFB HINT EC Label Color' =
-				VAR _cur = [TFB HINT EC Actions]
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				VAR _prev = CALCULATE([TFB HINT EC Actions], REMOVEFILTERS(dim_date), DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate))
-				RETURN SWITCH(TRUE(), ISBLANK(_prev), "#808080", _cur > _prev, "#00A651", _cur < _prev, "#D13438", "#808080")
+			lineageTag: a2f77fe9-3e60-49c6-a7c1-e032574db9a6
+			sourceLineageTag: 2e1d4073-f716-4d4e-91d5-a2f83f78cda2
+			dataCategory: Uncategorized
+
+		measure 'TFB HINT EC Label Color' = EXTERNALMEASURE("TFB HINT EC Label Color", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
 			displayFolder: 07 KPI Card Labels
-			lineageTag: ac5b94db-755a-45ea-a796-86d66b7690db
-		measure 'CpL Previous Period' =
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				    IF(
-				        ISBLANK(MaxDate),
-				        BLANK(),
-				        DIVIDE(
-				            CALCULATE([Total Cost], DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)),
-				            CALCULATE([TFB Lead Actions], DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)),
-				            BLANK()
-				        )
-				    )
-			formatString: $#,##0.0
-			displayFolder: 13 TFB Metrics
-			lineageTag: 86389934-491a-459a-a1c6-b3a8c7592a9e
+			lineageTag: bc27bed1-04af-4e8e-8d58-b77e1344c76e
+			sourceLineageTag: ac5b94db-755a-45ea-a796-86d66b7690db
+			dataCategory: Uncategorized
 
-		measure 'CpL Previous Label' =
-				
-				VAR _prev = COALESCE([CpL Previous Period], 0)
-				RETURN
-				"vs previous: " &
-				SWITCH(
-				    TRUE(),
-				    ABS(_prev) >= 1000000, "$" & FORMAT(_prev / 1000000, "0.0") & "M",
-				    ABS(_prev) >= 1000, "$" & FORMAT(_prev / 1000, "0.0") & "K",
-				    "$" & FORMAT(_prev, "#,##0.00")
-				)
-			displayFolder: 07 KPI Card Labels
-			lineageTag: be900d6a-293d-4fcc-9997-a0593c879610
+		measure 'Spend Range A' = EXTERNALMEASURE("Spend Range A", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			formatString: \$#,0.0;(\$#,0.0);\$#,0.0
+			lineageTag: 9e7abc04-ec79-4ff7-b1da-36630715fedd
+			sourceLineageTag: 406e06ac-b453-4a6b-b828-08eb202631ca
+			dataCategory: Uncategorized
 
-		measure 'CpL Change Label' =
-				
-				VAR _cur = [CpL]
-				VAR _prev = [CpL Previous Period]
-				VAR _pct = DIVIDE(_cur - _prev, _prev)
-				RETURN
-				IF(
-				    ISBLANK(_pct),
-				    "—",
-				    IF(
-				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				        IF(
-				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				            "0.0%"
-				        )
-				    )
-				)
-			displayFolder: 07 KPI Card Labels
-			lineageTag: c4425b1e-60d9-44c4-8b4b-202027a122f6
+		measure 'Spend Range B' = EXTERNALMEASURE("Spend Range B", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			formatString: \$#,0.0;(\$#,0.0);\$#,0.0
+			lineageTag: 7d876aba-c0b8-4006-af1d-f4c7180b5c36
+			sourceLineageTag: 2ff77128-6aef-4f5e-b8b3-8a4dee31c7b9
+			dataCategory: Uncategorized
 
-		measure 'CpL Label Color' =
-				VAR _cur = [CpL]
-				VAR _prev = [CpL Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#D13438",
-				        _cur < _prev, "#00A651",
-				        "#808080"
-				    )
-			displayFolder: 07 KPI Card Labels
-			lineageTag: 2981123e-72cb-4e05-93ce-dd003a6c03c9
+		measure 'Actions Range A' = EXTERNALMEASURE("Actions Range A", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			formatString: #,0
+			lineageTag: 69c1ae32-4c1a-42d8-a591-a7e355e1d9e1
+			sourceLineageTag: 653aa12e-c474-4eea-ba3d-48245050c4a2
+			dataCategory: Uncategorized
 
-		measure 'CpMid Funnel Previous Period' =
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				    IF(
-				        ISBLANK(MaxDate),
-				        BLANK(),
-				        DIVIDE(
-				            CALCULATE([Total Cost], DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)),
-				            CALCULATE([TFB Mid Funnel Actions], DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)),
-				            BLANK()
-				        )
-				    )
-			formatString: $#,##0.00
-			displayFolder: 13 TFB Metrics
-			lineageTag: f0bf8da9-853d-49a4-9ce7-8274c5ad0ca3
+		measure 'Actions Range B' = EXTERNALMEASURE("Actions Range B", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			formatString: #,0
+			lineageTag: 4bb5802d-63e0-46f2-916a-989cf99754eb
+			sourceLineageTag: c2005fd4-25c1-4d87-bccd-1b20735fdb41
+			dataCategory: Uncategorized
 
-		measure 'CpMid Funnel Previous Label' =
-				
-				VAR _prev = COALESCE([CpMid Funnel Previous Period], 0)
-				RETURN
-				"vs previous: " &
-				SWITCH(
-				    TRUE(),
-				    ABS(_prev) >= 1000000, "$" & FORMAT(_prev / 1000000, "0.0") & "M",
-				    ABS(_prev) >= 1000, "$" & FORMAT(_prev / 1000, "0.0") & "K",
-				    "$" & FORMAT(_prev, "#,##0.0")
-				)
-			displayFolder: 07 KPI Card Labels
-			lineageTag: 6115fa84-8dd5-4588-a699-9025be5d0ede
+		measure 'Orders Range B' = EXTERNALMEASURE("Orders Range B", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			formatString: #,0
+			lineageTag: b93c7e6a-acef-48fb-a9d4-ff65343ad48f
+			sourceLineageTag: 5c2d30b5-166a-4e34-97de-b2c65ba34ad1
+			dataCategory: Uncategorized
 
-		measure 'CpMid Funnel Change Label' =
-				VAR _cur = [CpMid Funnel]
-				VAR _prev = [CpMid Funnel Previous Period]
-				VAR _pct = DIVIDE(_cur - _prev, _prev)
-				RETURN
-				IF(
-				    ISBLANK(_pct),
-				    "—",
-				    IF(
-				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				        IF(
-				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				            "0.0%"
-				        )
-				    )
-				)
-			displayFolder: 07 KPI Card Labels
-			lineageTag: 354de0e0-83fc-489b-ada8-83b4514c275e
+		measure 'Orders Range A' = EXTERNALMEASURE("Orders Range A", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			formatString: #,0
+			lineageTag: d0eca1b0-ca27-49bf-b5fc-483bd6bf8b5e
+			sourceLineageTag: 0f861ed3-907d-4e75-9c3c-23edd5819e94
+			dataCategory: Uncategorized
 
-		measure 'CpMid Funnel Label Color' =
-				VAR _cur = [CpMid Funnel]
-				VAR _prev = [CpMid Funnel Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#D13438",
-				        _cur < _prev, "#00A651",
-				        "#808080"
-				    )
-			displayFolder: 07 KPI Card Labels
-			lineageTag: bfb52f88-46b8-4bf7-ad1e-b898e1c94337
+		measure 'CLicks Range B' = EXTERNALMEASURE("CLicks Range B", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			formatString: #,0
+			lineageTag: 92d63451-1a65-4966-8bbb-5d18af0370e7
+			sourceLineageTag: 27930cd8-7e12-4cf1-828f-5fd10d668bd9
+			dataCategory: Uncategorized
 
-		measure 'CpTFB HINT EC Previous Period' =
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				    IF(
-				        ISBLANK(MaxDate),
-				        BLANK(),
-				        DIVIDE(
-				            CALCULATE([Total Cost], DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)),
-				            CALCULATE([TFB HINT EC Actions], DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)),
-				            BLANK()
-				        )
-				    )
-			formatString: $#,##0.00
-			displayFolder: 13 TFB Metrics
-			lineageTag: 9a670832-7c61-42f5-97a4-bca14a633965
+		measure 'CLicks Range A' = EXTERNALMEASURE("CLicks Range A", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			formatString: #,0
+			lineageTag: f7ea8cf1-ccaf-429d-86c2-03d9bffcf07f
+			sourceLineageTag: a2942a4f-a4f3-46c7-9cd3-85f53e53d193
+			dataCategory: Uncategorized
 
-		measure 'CpTFB HINT EC Previous Label' =
-				
-				VAR _prev = COALESCE([CpTFB HINT EC Previous Period], 0)
-				RETURN
-				"vs previous: " &
-				SWITCH(
-				    TRUE(),
-				    ABS(_prev) >= 1000000, "$" & FORMAT(_prev / 1000000, "0.0") & "M",
-				    ABS(_prev) >= 1000, "$" & FORMAT(_prev / 1000, "0.0") & "K",
-				    "$" & FORMAT(_prev, "#,##0.0")
-				)
-			displayFolder: 07 KPI Card Labels
-			lineageTag: 8da308be-36a2-4a4b-bdbe-82d1ca312977
+		measure 'CPA Range A' = EXTERNALMEASURE("CPA Range A", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			formatString: \$#,0.0;(\$#,0.0);\$#,0.0
+			lineageTag: 58d79ff8-7c59-4078-872b-28f4a3cad232
+			sourceLineageTag: 93697a4a-2495-477c-a1c7-6c2a5e883591
+			dataCategory: Uncategorized
 
-		measure 'CpTFB HINT EC Change Label' =
-				VAR _cur = [CpTFB HINT EC]
-				VAR _prev = [CpTFB HINT EC Previous Period]
-				VAR _pct = DIVIDE(_cur - _prev, _prev)
-				RETURN
-				IF(
-				    ISBLANK(_pct),
-				    "—",
-				    IF(
-				        _cur > _prev,
-				        "▴ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				        IF(
-				            _cur < _prev,
-				            "▾ " & FORMAT(ABS(_pct), "#,##0.0%"),
-				            "0.0%"
-				        )
-				    )
-				)
-			displayFolder: 07 KPI Card Labels
-			lineageTag: 5b864a2b-fb1b-4398-8e95-a5e52fce2ad1
+		measure 'CPA Range B' = EXTERNALMEASURE("CPA Range B", DOUBLE, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			formatString: \$#,0.0;(\$#,0.0);\$#,0.0
+			lineageTag: 4c9b66e0-b013-4d01-875d-fe21fe6c8c42
+			sourceLineageTag: 1d28c4d8-457e-4128-a270-dbb239bc7bfc
+			dataCategory: Uncategorized
 
-		measure 'CpTFB HINT EC Label Color' =
-				VAR _cur = [CpTFB HINT EC]
-				VAR _prev = [CpTFB HINT EC Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#D13438",
-				        _cur < _prev, "#00A651",
-				        "#808080"
-				    )
-			displayFolder: 07 KPI Card Labels
-			lineageTag: 8f17243d-41ac-4b4f-b737-34cc78d29fc3
+		measure 'Range A Label' = EXTERNALMEASURE("Range A Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			lineageTag: d5d62c4c-9434-4dce-8707-50ceb29ce259
+			sourceLineageTag: 965288f3-eb85-488c-8c54-a4d38f364cd0
+			dataCategory: Uncategorized
 
-		measure 'TFB HINT EC CVR Previous Period' =
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				    IF(
-				        ISBLANK(MaxDate),
-				        BLANK(),
-				        DIVIDE(
-				            CALCULATE([TFB HINT EC Actions], DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)),
-				            CALCULATE([Total Clicks], DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)),
-				            BLANK()
-				        )
-				    )
-			formatString: 0.00%
-			displayFolder: 13 TFB Metrics
-			lineageTag: c6543d61-a447-4423-a33a-14b7dabceea0
+			annotation PBI_FormatHint = {"isText":true}
 
-		measure 'TFB HINT EC CVR Previous Label' = "vs previous: " & FORMAT(COALESCE([TFB HINT EC CVR Previous Period],0), "0.00%")
-			displayFolder: 07 KPI Card Labels
-			lineageTag: a656e451-7fb6-41e1-bc93-88cb7531d76b
+		measure 'Range B Label' = EXTERNALMEASURE("Range B Label", STRING, "DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1")
+			lineageTag: d2b492cc-0add-4934-a8c5-bf55c07ca5bc
+			sourceLineageTag: fc90ffe3-b8cc-46ae-b636-0b6bab5c2edd
+			dataCategory: Uncategorized
 
-		measure 'TFB HINT EC CVR Change Label' =
-				VAR _cur = [TFB HINT EC CVR]
-				VAR _prev = [TFB HINT EC CVR Previous Period]
-				VAR _pp = ABS(_cur - _prev) * 100
-				RETURN
-				IF(
-				    ISBLANK(_prev),
-				    "—",
-				    IF(_cur >= _prev, "▴ ", "▾ ") & FORMAT(_pp, "0.0") & "%"
-				)
-			displayFolder: 07 KPI Card Labels
-			lineageTag: 06bce398-7e0b-441c-be35-1d536ebf6daf
-
-		measure 'TFB HINT EC CVR Label Color' =
-				VAR _cur = [TFB HINT EC CVR]
-				VAR _prev = [TFB HINT EC CVR Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
-			displayFolder: 07 KPI Card Labels
-			lineageTag: 619a66a5-88c9-400f-a2df-f90af7571454
-
-		measure 'TFB Lead CVR Previous Period' =
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				    IF(
-				        ISBLANK(MaxDate),
-				        BLANK(),
-				        DIVIDE(
-				            CALCULATE([TFB Lead Actions], DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)),
-				            CALCULATE([Total Clicks], DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)),
-				            BLANK()
-				        )
-				    )
-			formatString: 0.00%
-			displayFolder: 13 TFB Metrics
-			lineageTag: bd1a2a19-5183-4fc4-bb0e-6e5fd2c9bead
-
-		measure 'TFB Lead CVR Previous Label' = "vs previous: " & FORMAT(COALESCE([TFB Lead CVR Previous Period],0), "0.00%")
-			displayFolder: 07 KPI Card Labels
-			lineageTag: 80b5f171-a1ab-4b53-9e93-7e3cd85fe4d6
-
-		measure 'TFB Lead CVR Change Label' =
-				VAR _cur = [TFB Lead CVR]
-				VAR _prev = [TFB Lead CVR Previous Period]
-				VAR _pp = ABS(_cur - _prev) * 100
-				RETURN
-				IF(
-				    ISBLANK(_prev),
-				    "—",
-				    IF(_cur >= _prev, "▴ ", "▾ ") & FORMAT(_pp, "0.0") & "%"
-				)
-			displayFolder: 07 KPI Card Labels
-			lineageTag: 93315cf0-463b-4bf4-9e2b-90355d2a701d
-
-		measure 'TFB Lead CVR Label Color' =
-				VAR _cur = [TFB Lead CVR]
-				VAR _prev = [TFB Lead CVR Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
-			displayFolder: 07 KPI Card Labels
-			lineageTag: db547837-d6fb-4db9-8d21-552efd637969
-
-		measure 'TFB Mid Funnel CVR Previous Period' =
-				VAR MaxDate = MAX(dim_date[date])
-				VAR MinDate = MIN(dim_date[date])
-				VAR DateRange = MaxDate - MinDate
-				VAR PrevStartDate = MinDate - DateRange - 1
-				VAR PrevEndDate = MaxDate - DateRange - 1
-				RETURN
-				    IF(
-				        ISBLANK(MaxDate),
-				        BLANK(),
-				        DIVIDE(
-				            CALCULATE([TFB Mid Funnel Actions], DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)),
-				            CALCULATE([Total Clicks], DATESBETWEEN(dim_date[date], PrevStartDate, PrevEndDate)),
-				            BLANK()
-				        )
-				    )
-			formatString: 0.00%
-			displayFolder: 13 TFB Metrics
-			lineageTag: 86bd5ca9-e12a-43fb-9941-981b98102920
-
-		measure 'TFB Mid Funnel CVR Previous Label' = "vs previous: " & FORMAT(COALESCE([TFB Mid Funnel CVR Previous Period],0), "0.00%")
-			displayFolder: 07 KPI Card Labels
-			lineageTag: d3ad60f5-7d85-43c1-9c63-074cb0e9a8e1
-
-		measure 'TFB Mid Funnel CVR Change Label' =
-				VAR _cur = [TFB Mid Funnel CVR]
-				VAR _prev = [TFB Mid Funnel CVR Previous Period]
-				VAR _pp = ABS(_cur - _prev) * 100
-				RETURN
-				IF(
-				    ISBLANK(_prev),
-				    "—",
-				    IF(_cur >= _prev, "▴ ", "▾ ") & FORMAT(_pp, "0.0") & "%"
-				)
-			displayFolder: 07 KPI Card Labels
-			lineageTag: 85e4ec80-5089-43ce-9b95-4ee4f234f452
-
-		measure 'TFB Mid Funnel CVR Label Color' =
-				VAR _cur = [TFB Mid Funnel CVR]
-				VAR _prev = [TFB Mid Funnel CVR Previous Period]
-				RETURN
-				    SWITCH(
-				        TRUE(),
-				        ISBLANK(_prev), "#808080",
-				        _cur > _prev, "#00A651",
-				        _cur < _prev, "#D13438",
-				        "#808080"
-				    )
-			displayFolder: 07 KPI Card Labels
-			lineageTag: e2d4e96c-56d7-48f1-9532-1c8a8b96172b
-
-		measure 'Total Cost label' =
-				VAR _v = [Total Cost]
-				RETURN
-				SWITCH(
-				    TRUE(),
-				    ABS(_v) >= 1000000, FORMAT(_v / 1000000, "$#,##0.0M"),
-				    ABS(_v) >= 1000, FORMAT(_v / 1000, "$#,##0K"),
-				    FORMAT(_v, "#,##0")
-				)
-			displayFolder: 01 Cost KPIs
-			lineageTag: d3821abd-3398-4987-a015-d6c155600144
-
-		measure 'Action Cost label' =
-				VAR _v = [Action Cost]
-				RETURN
-				SWITCH(
-				    TRUE(),
-				    ABS(_v) >= 1000000, FORMAT(_v / 1000000, "$#,##0.0M"),
-				    ABS(_v) >= 1000, FORMAT(_v / 1000, "$#,##0K"),
-				    FORMAT(_v, "#,##0")
-				)
-			displayFolder: 01 Cost KPIs
-			lineageTag: e9b6cb5a-efa3-4e76-83af-2cbfb66651dd
-
-		measure 'Other Cost label' =
-				VAR _v = [Other Cost]
-				RETURN
-				SWITCH(
-				    TRUE(),
-				    ABS(_v) >= 1000000, FORMAT(_v / 1000000, "$#,##0.0M"),
-				    ABS(_v) >= 1000, FORMAT(_v / 1000, "$#,##0K"),
-				    FORMAT(_v, "#,##0")
-				)
-			displayFolder: 01 Cost KPIs
-			lineageTag: a2425b25-6589-483e-a533-1f7904ac885c
-
-		measure 'Payable Click Cost label' =
-				VAR _v = [Payable Click Cost]
-				RETURN
-				SWITCH(
-				    TRUE(),
-				    ABS(_v) >= 1000000, FORMAT(_v / 1000000, "$#,##0.0M"),
-				    ABS(_v) >= 1000, FORMAT(_v / 1000, "$#,##0K"),
-				    FORMAT(_v, "#,##0")
-				)
-			displayFolder: 01 Cost KPIs
-			lineageTag: d69f2781-e0ff-4a15-a3b9-c91b61f2e281
-
-		measure Measure = 1
-			formatString: 0
-			displayFolder: 01 Cost KPIs
-			lineageTag: 3c76b5ba-6b5a-4e0e-a4b6-cec9bc6bcd12
+			annotation PBI_FormatHint = {"isText":true}
 
 		column Value
-			lineageTag: a858d575-d4f4-4f00-b6e6-cbc358009097
-			isNameInferred
-			sourceColumn: [Value]
+			dataType: int64
+			lineageTag: 17dec872-d045-4960-a2f5-2cd15012b19d
+			sourceLineageTag: a858d575-d4f4-4f00-b6e6-cbc358009097
+			dataCategory: Uncategorized
+			summarizeBy: sum
+			sourceColumn: Value
 
-		partition KPI = calculated
-			mode: import
-			source = { ROW("MeasureID", 1) }
+			annotation SummarizationSetBy = Automatic
+
+		partition KPI = entity
+			mode: directQuery
+			source
+				entityName: KPI
+				expressionSource: 'DirectQuery to AS - T-Mobile Affiliate Power BI Enterprise Summary_v1'
+
+		annotation PBI_ResultType = Exception
+
